@@ -15,7 +15,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="orange">
+                <a href="/stuckAboveBook/home/addProblem" class="orange">
                     Dodaj problem
                 </a>
             </li>

@@ -23,4 +23,18 @@ class Home extends CI_Controller {
 		$this->load->view('categories/contents',$data);
 		$this->load->view('footer');
 	}
+	public function loadCategories()
+	{
+		$data['q']=$this->uri->segment(3);
+		$this->load->model("download_Model");
+		$data['categorylist']=$this->download_Model->getCategory();
+		$this->load->view('helpers/categoriesAJAX',$data);
+	}
+	public function addProblem()
+	{
+		$this->load->view('header');
+		$this->load->view('nav');
+		$this->load->view('problem/contents');
+		$this->load->view('footer');
+	}
 }
