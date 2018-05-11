@@ -10,4 +10,10 @@ Class download_Model extends CI_Model
 			$r=$this->db->get('category');
 			return $r->result();
 		}
+		public function getBooksByCategoryId($categoryId)
+		{
+			$this->db->where('category_id',$categoryId);
+			$r=$this->db->get('books');
+			return $r->result();
+		}
 }
