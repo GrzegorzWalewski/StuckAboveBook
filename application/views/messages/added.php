@@ -1,0 +1,1 @@
+<div class="uk-width-1-1 uk-text-center positive"> Twój problem został wysłany ;)</div>

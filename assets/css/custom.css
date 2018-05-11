@@ -71,3 +71,8 @@ html body nav.uk-navbar-container.uk-margin.uk-navbar{
 	background-color: white;
  	position: absolute;
 }
+.positive
+{
+	background-color: #009933;
+	color:white;
+}
