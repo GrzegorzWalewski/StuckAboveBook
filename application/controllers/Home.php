@@ -16,12 +16,27 @@ class Home extends CI_Controller {
 	}
 	public function categories()
 	{
-		$this->load->model("download_Model");
+        if(!empty($this->uri->segment(3)))
+        {
+            $categoryId=$this->uri->segment(3);
+            $this->load->model("download_Model");
+            $data['books']=$this->download_Model->getBooksByCategoryId($categoryId);
+            $this->load->view('header');
+		    $this->load->view('nav');
+            $this->load->view('books/contents',$data);
+            $this->load->view('footer');
+        }
+		else
+        {
+        $this->load->model("download_Model");
 		$data['categorylist']=$this->download_Model->getCategory();
 		$this->load->view('header');
 		$this->load->view('nav');
 		$this->load->view('categories/contents',$data);
 		$this->load->view('footer');
+            
+            
+        }
 	}
 	public function loadCategories()
 	{

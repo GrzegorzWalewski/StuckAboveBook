@@ -18,6 +18,7 @@
                 <div class="uk-form-width-medium border-1 livesearch" style="margin-left: 452px;" id="book">
                 </div>
             	</div>
+        <div class="uk-text-center">Jeżeli nie ma tutaj twojej książki/kategorii przejdź <a href="/stuckAboveBook/home/addBook">tutaj</a> by w szybki sposób ją dodać</div>
         	
 		</div>
 

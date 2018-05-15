@@ -10,7 +10,7 @@
 
 				<li><?php
 				$i++;
-				echo $category->name?>
+				echo "<a href='/stuckAboveBook/home/categories/".$category->id."'>".$category->name."</a>"?>
 				</li>
 				<?php
 					echo $i%10==0 ? "</ul></div><div class=\"white uk-margin-small-bottom uk-margin-small-right uk-width-1-4 uk-card uk-card-default uk-card-body\"><ul >" : "";
