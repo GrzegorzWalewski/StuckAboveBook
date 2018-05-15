@@ -2,7 +2,8 @@
 <p id="author"></p>
 <p id="pages"></p>
 <p id="category"></p>
-<script>
+<script type="text/javascript" charset="utf-8">
+    var str="I hate this job";
   window.onload = function ()
   {
     var x=document.getElementById("left-big-col").children[0];
@@ -24,33 +25,24 @@
     document.getElementById("author").innerText=author;
     document.getElementById("pages").innerText=pages;
     document.getElementById("category").innerText=category;
-    uploadBookData(title,author,pages,category);
+    str = title+"/"+author+"/"+pages+"/"+category;
+      setTimeout(function(){ passVal(); },0);
+  }
+  function passVal(){
+        var data = {
+            str: str
+        };
 
-  }
-  function uploadBookData(title,author,pages,category) {
-  if (window.XMLHttpRequest) {
-    // code for IE7+, Firefox, Chrome, Opera, Safari
-    xmlhttp=new XMLHttpRequest();
-  } else {  // code for IE6, IE5
-    xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  xmlhttp.onreadystatechange=function() {
-    if (this.readyState==4 && this.status==200) {
-      document.getElementById("category").innerHTML=this.responseText;
+        $.post("/stuckAboveBook/home/addBooks/", data);
+      goBack();
     }
-  }
-  var str = title+"/"+author+"/"+pages+"/"+category;
-  var replaced = str.split(' ').join('_');
-  xmlhttp.open("GET","/stuckAboveBook/home/addBooks/"+replaced,true);
-  xmlhttp.send();
-  first();
-}
-function first(){
-  // Simulate a code delay
+    function goBack(){
   setTimeout( function(){
-    window.location.href = "/stuckAboveBook/home/addBook";
+    window.location.href = "/stuckAboveBook/home/addBook/added";
   }, 1000 );
 }
+
+    
 </script>
 <?php
 print file_get_contents_utf8($q);

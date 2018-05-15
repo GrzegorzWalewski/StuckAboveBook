@@ -32,6 +32,7 @@ class Home extends CI_Controller {
 	}
 	public function loadBooks()
 	{
+        $this->load->view('header');
 		$data['categoryId']=$this->uri->segment(3);
 		$data['q']=$this->uri->segment(4);
 		$this->load->model("download_Model");
@@ -40,19 +41,20 @@ class Home extends CI_Controller {
 	}
 	public function addBooks()
 	{
+        $this->load->view('header');
 		echo "<h1>Pracujemy nad tym...</h1>";
 		if(!empty($this->input->get('link')))
 		{
 			$data['q']=$this->input->get('link');
 			$this->load->view('helpers/addBooks',$data);
 		}
-		if(!empty($this->uri->segment(3)))
-		{
-			echo "duad";
+		if(!empty($this->input->post("str")))
+        {
+           $str = $this->input->post("str");
 			$this->load->model('upload_Model');
-			$this->upload_Model->uploadBookAndCategory($this->uri->segment(3),$this->uri->segment(4),$this->uri->segment(5),$this->uri->segment(6));
+			$this->upload_Model->uploadBookAndCategory($str);
 		}
-	}
+    }
 	public function addProblem()
 	{
 		$this->load->view('header');
@@ -75,6 +77,10 @@ class Home extends CI_Controller {
 	{
 		$this->load->view('header');
 		$this->load->view('nav');
+        if($this->uri->segment(3)=="added")
+        {
+            $this->load->view('messages/added');
+        }
 		$this->load->view('book/contents');
 		$this->load->view('footer');
 	}

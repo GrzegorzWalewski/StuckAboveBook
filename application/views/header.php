@@ -9,6 +9,7 @@
     <title>StuckAboveBook</title>
     <script type="text/javascript" src="<?php echo base_url() ?>assets/js/uikit.min.js"></script>
     <script type="text/javascript" src="<?php echo base_url() ?>assets/js/uikit-icons.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/uikit.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/custom.css">
 </head>
