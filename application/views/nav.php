@@ -20,7 +20,7 @@
                 </a>
             </li>
             <li>
-                <a href="#" class="orange">
+                <a href="/stuckAboveBook/auth/login" class="orange">
                     Zaloguj się
                 </a>
             </li>
