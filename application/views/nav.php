@@ -20,9 +20,25 @@
                 </a>
             </li>
             <li>
-                <a href="/stuckAboveBook/auth/login" class="orange">
+                <?php if($is_logged_in)
+                {?>
+                    <a class="orange" href="#"><?php echo $username?></a>
+                        <div class="uk-navbar-dropdown">
+                            <ul class="uk-nav uk-navbar-dropdown-nav">
+                                <li class=""><a href="#">Twój profil</a></li>
+                                <li class=""><a href="#">Twoje pytania</a></li>
+                                <li class=""><a href="/stuckAboveBook/examples/logout">Wyloguj</a></li>
+                            </ul>
+                        </div>
+                <?php
+                }
+                else
+                {?>
+                    <a href="/stuckAboveBook/examples/login_form" class="orange">
                     Zaloguj się
                 </a>
+                <?php }?>
+                
             </li>
         </ul>
     </div>

@@ -44,23 +44,35 @@ if( ! isset( $on_hold_message ) )
 			</div>
 		';
 	}
-
+	echo '<div class="form">';
 	echo form_open( $login_url, ['class' => 'std-form'] ); 
 ?>
 
 	<div>
-
-		<label for="login_string" class="form_label">Username or Email</label>
-		<input type="text" name="login_string" id="login_string" class="form_input" autocomplete="off" maxlength="255" />
+		<div class="uk-margin">
+			<label for="login_string" class="form_label">Username or Email</label>
+			<br>
+        	<div class="uk-inline">
+        	<a class="uk-form-icon" href="#" uk-icon="icon: user"></a>
+			<input type="text" name="login_string" id="login_string" class="uk-input" autocomplete="off" maxlength="255" />
+		</div>
+	</div>
+</div>
 
 		<br />
-
+<div>
+		<div class="uk-margin">
 		<label for="login_pass" class="form_label">Password</label>
-		<input type="password" name="login_pass" id="login_pass" class="form_input password" <?php 
+		<br>
+        <div class="uk-inline">
+		<a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: lock"></a>
+		<input type="password" name="login_pass" id="login_pass" class="uk-input password" <?php 
 			if( config_item('max_chars_for_password') > 0 )
 				echo 'maxlength="' . config_item('max_chars_for_password') . '"'; 
 		?> autocomplete="off" readonly="readonly" onfocus="this.removeAttribute('readonly');" />
-
+		</div>
+	</div>
+</div>
 
 		<?php
 			if( config_item('allow_remember_me') )
@@ -86,11 +98,11 @@ if( ! isset( $on_hold_message ) )
 		</p>
 
 
-		<input type="submit" name="submit" value="Login" id="submit_button"  />
+		<input class="uk-button" type="submit" name="submit" value="Login" id="submit_button"  />
 
 	</div>
 </form>
-
+</div>
 <?php
 
 	}

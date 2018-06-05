@@ -80,3 +80,9 @@ html body nav.uk-navbar-container.uk-margin.uk-navbar{
 {
     background-color: white;
 }
+.form
+{
+	width:252px;
+	margin-left: calc(50% - 125px);
+	margin-top: 16%;
+}

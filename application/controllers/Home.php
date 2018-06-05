@@ -1,16 +1,27 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Home extends CI_Controller {
+class Home extends MY_Controller {
 	public function __construct()
         {
                 parent::__construct();
                	$this->load->helper('url');
+				$this->load->helper('form');
+		        if($this->verify_min_level(1) )
+					{
+						$data["is_logged_in"]=TRUE;
+					}
+					else
+					{
+						$data["is_logged_in"]=FALSE;
+						$data['username']=$this->auth_username;
+						$data['user_id']=$this->auth_user_id;
+					}
+					$this->load->view('header');
+					$this->load->view('nav',$data);
         }
 	public function index()
 	{
-		$this->load->view('header');
-		$this->load->view('nav');
 		$this->load->view('contents');
 		$this->load->view('footer');
 	}
@@ -21,8 +32,6 @@ class Home extends CI_Controller {
             $categoryId=$this->uri->segment(3);
             $this->load->model("download_Model");
             $data['books']=$this->download_Model->getBooksByCategoryId($categoryId);
-            $this->load->view('header');
-		    $this->load->view('nav');
             $this->load->view('books/contents',$data);
             $this->load->view('footer');
         }
@@ -30,8 +39,6 @@ class Home extends CI_Controller {
         {
         $this->load->model("download_Model");
 		$data['categorylist']=$this->download_Model->getCategory();
-		$this->load->view('header');
-		$this->load->view('nav');
 		$this->load->view('categories/contents',$data);
 		$this->load->view('footer');
             
@@ -46,8 +53,7 @@ class Home extends CI_Controller {
 		$this->load->view('helpers/categoriesAJAX',$data);
 	}
 	public function loadBooks()
-	{
-        $this->load->view('header');
+	{ 
 		$data['categoryId']=$this->uri->segment(3);
 		$data['q']=$this->uri->segment(4);
 		$this->load->model("download_Model");
@@ -55,8 +61,7 @@ class Home extends CI_Controller {
 		$this->load->view('helpers/booksAJAX',$data);
 	}
 	public function addBooks()
-	{
-        $this->load->view('header');
+	{    
 		echo "<h1>Pracujemy nad tym...</h1>";
 		if(!empty($this->input->get('link')))
 		{
@@ -72,8 +77,6 @@ class Home extends CI_Controller {
     }
 	public function addProblem()
 	{
-		$this->load->view('header');
-		$this->load->view('nav');
 		if(!null==$this->input->post('categoryId'))
 		{
 			$this->load->model('upload_Model');
@@ -90,9 +93,7 @@ class Home extends CI_Controller {
 	}
 	public function addBook()
 	{
-		$this->load->view('header');
-		$this->load->view('nav');
-        if($this->uri->segment(3)=="added")
+		if($this->uri->segment(3)=="added")
         {
             $this->load->view('messages/added');
         }

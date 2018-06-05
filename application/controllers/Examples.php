@@ -25,6 +25,7 @@ class Examples extends MY_Controller
 		// Form and URL helpers always loaded (just for convenience)
 		$this->load->helper('url');
 		$this->load->helper('form');
+		$this->load->view('header');
 	}
 
 	// -----------------------------------------------------------------------
@@ -76,11 +77,11 @@ class Examples extends MY_Controller
 	 * Notice that we are using verify_min_level to check if
 	 * a user is already logged in.
 	 */
-	public function optional_login_test()
+	public function login_form()
 	{
 		if( $this->verify_min_level(1) )
 		{
-			$page_content = '<p>Although not required, you are logged in!</p>';
+			redirect('/');
 		}
 		elseif( $this->tokens->match && $this->optional_login() )
 		{
@@ -91,19 +92,14 @@ class Examples extends MY_Controller
 			// Notice parameter set to TRUE, which designates this as an optional login
 			$this->setup_login_form(TRUE);
 
-			$page_content = '<p>You are not logged in, but can still see this page.</p>';
 
 			// Form helper needed
 			$this->load->helper('form');
 
-			$page_content .= $this->load->view('examples/login_form', '', TRUE);
+		
 		}
-
-		echo $this->load->view('examples/page_header', '', TRUE);
-
-		echo $page_content;
-
-		echo $this->load->view('examples/page_footer', '', TRUE);
+		$this->load->view('examples/login_form');
+		$this->load->view('footer');
 	}
 	
 	// -----------------------------------------------------------------------
@@ -192,10 +188,10 @@ class Examples extends MY_Controller
 	{
 		// Customize this array for your user
 		$user_data = [
-			'username'   => 'skunkbot',
-			'passwd'     => 'PepeLePew7',
-			'email'      => 'skunkbot@example.com',
-			'auth_level' => '1', // 9 if you want to login @ examples/index.
+			'username'   => 'Grzojda',
+			'passwd'     => 'Walewski2203',
+			'email'      => 'grzojda@example.com',
+			'auth_level' => '9', // 9 if you want to login @ examples/index.
 		];
 
 		$this->is_logged_in();
@@ -315,7 +311,7 @@ class Examples extends MY_Controller
 		// Set redirect protocol
 		$redirect_protocol = USE_SSL ? 'https' : NULL;
 
-		redirect( site_url( LOGIN_PAGE . '?' . AUTH_LOGOUT_PARAM . '=1', $redirect_protocol ) );
+		redirect('/');
 	}
 
 	// --------------------------------------------------------------
