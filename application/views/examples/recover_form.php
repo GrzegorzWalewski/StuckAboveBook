@@ -13,14 +13,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @link        http://community-auth.com
  */
 ?>
-
-<h1>Account Recovery</h1>
-
 <?php
 if( isset( $disabled ) )
 {
 	echo '
-		<div style="border:1px solid red;">
+		<div class="form uk-alert-danger padding_45">
 			<p>
 				Account Recovery is Disabled.
 			</p>
@@ -37,7 +34,7 @@ if( isset( $disabled ) )
 else if( isset( $banned ) )
 {
 	echo '
-		<div style="border:1px solid red;">
+		<div class="fform uk-alert-danger padding_45">
 			<p>
 				Account Locked.
 			</p>
@@ -54,7 +51,7 @@ else if( isset( $banned ) )
 else if( isset( $confirmation ) )
 {
 	echo '
-		<div style="border:1px solid green;">
+		<div class="form uk-alert-success">
 			<p>
 				Congratulations, you have created an account recovery link.
 			</p>
@@ -80,18 +77,20 @@ else if( isset( $confirmation ) )
 else if( isset( $no_match ) )
 {
 	echo '
-		<div  style="border:1px solid red;">
+		<div class="uk-alert-danger" uk-alert>
+    			<a class="uk-alert-close" uk-close></a>
 			<p class="feedback_header">
 				Supplied email did not match any record.
 			</p>
 		</div>
+		<div class="form">
 	';
 
 	$show_form = 1;
 }
 else
 {
-	echo '
+	echo '<div class="form">
 		<p>
 			If you\'ve forgotten your password and/or username, 
 			enter the email address used for your account, 
@@ -108,25 +107,23 @@ if( isset( $show_form ) )
 
 		 <?php echo form_open(); ?>
 			<div>
-				<fieldset>
 					<legend>Enter your account's email address:</legend>
 					<div>
 
 						<?php
 							// EMAIL ADDRESS *************************************************
-							echo form_label('Email Address','email', ['class'=>'form_label'] );
+							echo form_label('','email', ['class'=>'form_label '] );
 
 							$input_data = [
 								'name'		=> 'email',
 								'id'		=> 'email',
-								'class'		=> 'form_input',
+								'class'		=> 'form_input uk-input uk-margin-top',
 								'maxlength' => 255
 							];
 							echo form_input($input_data);
 						?>
 
 					</div>
-				</fieldset>
 				<div>
 					<div>
 
@@ -137,14 +134,14 @@ if( isset( $show_form ) )
 								'id'    => 'submit_button',
 								'value' => 'Send Email'
 							];
-							echo form_submit($input_data);
+							echo form_submit($input_data,'','class="uk-margin-top uk-button"');
 						?>
 
 					</div>
 				</div>
 			</div>
 		</form>
-
+	</div>
 	<?php
 }
 /* End of file recover_form.php */

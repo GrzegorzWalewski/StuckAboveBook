@@ -86,3 +86,9 @@ html body nav.uk-navbar-container.uk-margin.uk-navbar{
 	margin-left: calc(50% - 125px);
 	margin-top: 16%;
 }
+.padding_45
+{
+	padding: 45px;
+	margin-left: calc(50% - 170px)!important;
+	margin-top: 15%!important;
+}

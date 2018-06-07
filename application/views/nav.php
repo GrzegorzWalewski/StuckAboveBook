@@ -14,14 +14,14 @@
                     Lista Książek
                 </a>
             </li>
-            <li>
-                <a href="/stuckAboveBook/home/addProblem" class="orange">
-                    Dodaj problem
-                </a>
-            </li>
-            <li>
                 <?php if($is_logged_in)
                 {?>
+                    <li>
+                        <a href="/stuckAboveBook/home/addProblem" class="orange">
+                        Dodaj problem
+                        </a>
+                    </li>
+            <li>
                     <a class="orange" href="#"><?php echo $username?></a>
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
@@ -30,16 +30,19 @@
                                 <li class=""><a href="/stuckAboveBook/examples/logout">Wyloguj</a></li>
                             </ul>
                         </div>
+                    </li>
                 <?php
                 }
                 else
                 {?>
+                    <li>
                     <a href="/stuckAboveBook/examples/login_form" class="orange">
                     Zaloguj się
                 </a>
+                </li>
                 <?php }?>
                 
-            </li>
+            
         </ul>
     </div>
     <div class="uk-navbar-right">

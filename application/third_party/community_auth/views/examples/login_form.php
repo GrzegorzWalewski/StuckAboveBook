@@ -12,23 +12,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @license     BSD - http://www.opensource.org/licenses/BSD-3-Clause
  * @link        http://community-auth.com
  */
-
-if( ! isset( $optional_login ) )
-{
-	echo '<h1>Login</h1>';
-}
-
 if( ! isset( $on_hold_message ) )
 {
 	if( isset( $login_error_mesg ) )
 	{
 		echo '
-			<div style="border:1px solid red;">
-				<p>
-					Login Error #' . $this->authentication->login_errors_count . '/' . config_item('max_allowed_attempts') . ': Invalid Username, Email Address, or Password.
-				</p>
-				<p>
-					Username, email address and password are all case sensitive.
+			<div class="uk-alert-danger" uk-alert>
+    			<a class="uk-alert-close" uk-close></a>
+    			<p>
+					Invalid Username, Email Address, or Password.
 				</p>
 			</div>
 		';
@@ -110,7 +102,7 @@ if( ! isset( $on_hold_message ) )
 	{
 		// EXCESSIVE LOGIN ATTEMPTS ERROR MESSAGE
 		echo '
-			<div style="border:1px solid red;">
+			<div class="form uk-alert-danger padding_45 ">
 				<p>
 					Excessive Login Attempts
 				</p>

@@ -45,7 +45,7 @@ class Examples extends MY_Controller
 
 			echo '<p>You are logged in!</p>';
 
-			echo $this->load->view('examples/page_footer', '', TRUE);
+			echo $this->load->view('footer');
 		}
 	}
 	
@@ -64,7 +64,7 @@ class Examples extends MY_Controller
 
 		echo '<p>Welcome Home</p>';
 
-		echo $this->load->view('examples/page_footer', '', TRUE);
+		echo $this->load->view('footer');
 	}
 	
 	// -----------------------------------------------------------------------
@@ -164,7 +164,7 @@ class Examples extends MY_Controller
 
 		echo '</p>';
 
-		echo $this->load->view('examples/page_footer', '', TRUE);
+		echo $this->load->view('footer');
 	}
 	
 	// -----------------------------------------------------------------------
@@ -270,7 +270,7 @@ class Examples extends MY_Controller
 			echo '<h1>User Creation Error(s)</h1>' . validation_errors();
 		}
 
-		echo $this->load->view('examples/page_footer', '', TRUE);
+		echo $this->load->view('footer');
 	}
 	
 	// -----------------------------------------------------------------------
@@ -291,12 +291,10 @@ class Examples extends MY_Controller
 			$this->require_min_level(1);
 
 		$this->setup_login_form();
-
-		$html = $this->load->view('examples/page_header', '', TRUE);
-		$html .= $this->load->view('examples/login_form', '', TRUE);
-		$html .= $this->load->view('examples/page_footer', '', TRUE);
+		$html = $this->load->view('examples/login_form', '', TRUE);
 
 		echo $html;
+		echo $this->load->view('footer');
 	}
 
 	// --------------------------------------------------------------
@@ -394,11 +392,9 @@ class Examples extends MY_Controller
 			}
 		}
 
-		echo $this->load->view('examples/page_header', '', TRUE);
-
 		echo $this->load->view('examples/recover_form', ( isset( $view_data ) ) ? $view_data : '', TRUE );
+		echo $this->load->view('footer','',TRUE);
 
-		echo $this->load->view('examples/page_footer', '', TRUE);
 	}
 
 	// --------------------------------------------------------------
@@ -411,6 +407,7 @@ class Examples extends MY_Controller
 	 */
 	public function recovery_verification( $user_id = '', $recovery_code = '' )
 	{
+		echo $this->load->view('header','',TRUE);
 		/// If IP is on hold, display message
 		if( $on_hold = $this->authentication->current_hold_status( TRUE ) )
 		{
@@ -477,12 +474,9 @@ class Examples extends MY_Controller
 				$this->examples_model->recovery_password_change();
 			}
 		}
-
-		echo $this->load->view('examples/page_header', '', TRUE);
-
 		echo $this->load->view( 'examples/choose_password_form', $view_data, TRUE );
 
-		echo $this->load->view('examples/page_footer', '', TRUE);
+		echo $this->load->view('footer','',TRUE);
 	}
 
 	// --------------------------------------------------------------
@@ -546,10 +540,8 @@ class Examples extends MY_Controller
 				});
 			});
 		</script>";
-
-		$html = $this->load->view('examples/page_header', $data, TRUE);
 		$html .= $this->load->view('examples/ajax_login_form', $data, TRUE);
-		$html .= $this->load->view('examples/page_footer', '', TRUE);
+		$html .= $this->load->view('footer');
 
 		echo $html;
 	}

@@ -14,8 +14,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 ?>
 
-<h1>Account Recovery - Stage 2</h1>
-
 <?php
 
 $showform = 1;
@@ -23,7 +21,8 @@ $showform = 1;
 if( isset( $validation_errors ) )
 {
 	echo '
-		<div style="border:1px solid red;">
+		<div class="uk-alert-danger" uk-alert>
+    			<a class="uk-alert-close" uk-close></a>
 			<p>
 				The following error occurred while changing your password:
 			</p>
@@ -44,7 +43,8 @@ else
 if( isset( $validation_passed ) )
 {
 	echo '
-		<div style="border:1px solid green;">
+		<div class="uk-alert-success" uk-alert>
+    			<a class="uk-alert-close" uk-close></a>
 			<p>
 				You have successfully changed your password.
 			</p>
@@ -59,7 +59,8 @@ if( isset( $validation_passed ) )
 if( isset( $recovery_error ) )
 {
 	echo '
-		<div style="border:1px solid red;">
+	<div class="form">
+		<div class="uk-alert-danger">
 			<p>
 				No usable data for account recovery.
 			</p>
@@ -78,7 +79,8 @@ if( isset( $recovery_error ) )
 if( isset( $disabled ) )
 {
 	echo '
-		<div style="border:1px solid red;">
+	<div class="form">
+		<div class="uk-alert-danger">
 			<p>
 				Account recovery is disabled.
 			</p>
@@ -101,7 +103,7 @@ if( $showform == 1 )
 		{
 			if( isset( $username ) )
 			{
-				echo '<p>
+				echo '<div class="form"><p>
 					Your login user name is <i>' . $username . '</i><br />
 					Please write this down, and change your password now:
 				</p>';
@@ -115,19 +117,19 @@ if( $showform == 1 )
 		?>
 			<div id="form">
 				<?php echo form_open(); ?>
-					<fieldset>
-						<legend>Step 2 - Choose your new password</legend>
+						<legend>Choose your new password</legend>
 						<div>
 
 							<?php
 								// PASSWORD LABEL AND INPUT ********************************
-								echo form_label('Password','passwd', ['class'=>'form_label']);
+								echo form_label('','passwd', ['class'=>'form_label']);
 
 								$input_data = [
 									'name'       => 'passwd',
 									'id'         => 'passwd',
-									'class'      => 'form_input password',
-									'max_length' => config_item('max_chars_for_password')
+									'class'      => 'form_input password uk-margin-top uk-input',
+									'max_length' => config_item('max_chars_for_password'),
+									'placeholder'=>	'Passoword'
 								];
 								echo form_password($input_data);
 							?>
@@ -137,19 +139,19 @@ if( $showform == 1 )
 
 							<?php
 								// CONFIRM PASSWORD LABEL AND INPUT ******************************
-								echo form_label('Confirm Password','passwd_confirm', ['class'=>'form_label']);
+								echo form_label('','passwd_confirm', ['class'=>'form_label']);
 
 								$input_data = [
 									'name'       => 'passwd_confirm',
 									'id'         => 'passwd_confirm',
-									'class'      => 'form_input password',
-									'max_length' => config_item('max_chars_for_password')
+									'class'      => 'form_input password uk-margin-top uk-input',
+									'max_length' => config_item('max_chars_for_password'),
+									'placeholder'=>	'Confirm password'
 								];
 								echo form_password($input_data);
 							?>
 
 						</div>
-					</fieldset>
 					<div>
 						<div>
 
@@ -166,15 +168,17 @@ if( $showform == 1 )
 									'id'    => 'submit_button',
 									'value' => 'Change Password'
 								];
-								echo form_submit($input_data);
+								echo form_submit($input_data,'','class="uk-button uk-margin-top"');
 							?>
 
 						</div>
 					</div>
 				</form>
 			</div>
+		</div>
 		<?php
 	}
 }
+
 /* End of file choose_password_form.php */
 /* Location: /community_auth/views/examples/choose_password_form.php */
