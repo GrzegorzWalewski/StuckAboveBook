@@ -294,7 +294,7 @@ class Examples extends MY_Controller
 		$html = $this->load->view('examples/login_form', '', TRUE);
 
 		echo $html;
-		echo $this->load->view('footer');
+		echo $this->load->view('footer','',true);
 	}
 
 	// --------------------------------------------------------------
@@ -407,7 +407,6 @@ class Examples extends MY_Controller
 	 */
 	public function recovery_verification( $user_id = '', $recovery_code = '' )
 	{
-		echo $this->load->view('header','',TRUE);
 		/// If IP is on hold, display message
 		if( $on_hold = $this->authentication->current_hold_status( TRUE ) )
 		{

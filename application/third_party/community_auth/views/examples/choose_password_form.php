@@ -15,7 +15,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <?php
-
+$this->load->view('header');
 $showform = 1;
 
 if( isset( $validation_errors ) )
@@ -23,15 +23,8 @@ if( isset( $validation_errors ) )
 	echo '
 		<div class="uk-alert-danger" uk-alert>
     			<a class="uk-alert-close" uk-close></a>
-			<p>
 				The following error occurred while changing your password:
-			</p>
-			<ul>
 				' . $validation_errors . '
-			</ul>
-			<p>
-				PASSWORD NOT UPDATED
-			</p>
 		</div>
 	';
 }
@@ -115,7 +108,7 @@ if( $showform == 1 )
 		}
 
 		?>
-			<div id="form">
+			<div class="form">
 				<?php echo form_open(); ?>
 						<legend>Choose your new password</legend>
 						<div>
