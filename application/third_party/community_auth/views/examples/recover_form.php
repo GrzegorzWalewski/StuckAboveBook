@@ -134,7 +134,8 @@ if( isset( $show_form ) )
 								'id'    => 'submit_button',
 								'value' => 'Send Email'
 							];
-							echo form_submit($input_data,'','class="uk-margin-top uk-button"');
+							echo form_submit($input_data,'','class="uk-margin-top uk-button blue"');
+							echo '<input class="uk-button uk-margin-top right-in-parent" formaction="<?php echo base_url() ?>" type="submit" name="submit" value="Home" id="submit_button"  />';
 						?>
 
 					</div>

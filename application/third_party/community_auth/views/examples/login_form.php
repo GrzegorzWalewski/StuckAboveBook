@@ -95,7 +95,8 @@ if( ! isset( $on_hold_message ) )
 		</p>
 
 
-		<input class="uk-button" type="submit" name="submit" value="Login" id="submit_button"  />
+		<input class="uk-button blue" type="submit" name="submit" value="Login" id="submit_button"  />
+		<input class="uk-button right-in-parent" formaction="<?php echo base_url() ?>" type="submit" name="submit" value="Home" id="submit_button"  />
 
 	</div>
 </form>

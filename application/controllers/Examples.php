@@ -29,7 +29,6 @@ class Examples extends MY_Controller
 	}
 
 	// -----------------------------------------------------------------------
-
 	/**
 	 * Demonstrate being redirected to login.
 	 * If you are logged in and request this method,
@@ -187,90 +186,101 @@ class Examples extends MY_Controller
 	public function create_user()
 	{
 		// Customize this array for your user
-		$user_data = [
-			'username'   => 'Grzojda',
-			'passwd'     => 'Walewski2203',
-			'email'      => 'grzojda@example.com',
-			'auth_level' => '9', // 9 if you want to login @ examples/index.
-		];
-
-		$this->is_logged_in();
-
-		echo $this->load->view('examples/page_header', '', TRUE);
-
-		// Load resources
-		$this->load->helper('auth');
-		$this->load->model('examples/examples_model');
-		$this->load->model('examples/validation_callables');
-		$this->load->library('form_validation');
-
-		$this->form_validation->set_data( $user_data );
-
-		$validation_rules = [
-			[
-				'field' => 'username',
-				'label' => 'username',
-				'rules' => 'max_length[12]|is_unique[' . db_table('user_table') . '.username]',
-				'errors' => [
-					'is_unique' => 'Username already in use.'
-				]
-			],
-			[
-				'field' => 'passwd',
-				'label' => 'passwd',
-				'rules' => [
-					'trim',
-					'required',
-					[ 
-						'_check_password_strength', 
-						[ $this->validation_callables, '_check_password_strength' ] 
-					]
-				],
-				'errors' => [
-					'required' => 'The password field is required.'
-				]
-			],
-			[
-				'field'  => 'email',
-				'label'  => 'email',
-				'rules'  => 'trim|required|valid_email|is_unique[' . db_table('user_table') . '.email]',
-				'errors' => [
-					'is_unique' => 'Email address already in use.'
-				]
-			],
-			[
-				'field' => 'auth_level',
-				'label' => 'auth_level',
-				'rules' => 'required|integer|in_list[1,6,9]'
-			]
-		];
-
-		$this->form_validation->set_rules( $validation_rules );
-
-		if( $this->form_validation->run() )
+		if(null===($this->input->post("send")))
 		{
-			$user_data['passwd']     = $this->authentication->hash_passwd($user_data['passwd']);
-			$user_data['user_id']    = $this->examples_model->get_unused_id();
-			$user_data['created_at'] = date('Y-m-d H:i:s');
-
-			// If username is not used, it must be entered into the record as NULL
-			if( empty( $user_data['username'] ) )
-			{
-				$user_data['username'] = NULL;
-			}
-
-			$this->db->set($user_data)
-				->insert(db_table('user_table'));
-
-			if( $this->db->affected_rows() == 1 )
-				echo '<h1>Congratulations</h1>' . '<p>User ' . $user_data['username'] . ' was created.</p>';
+			$this->load->view('examples/create_account_form');
+			$this->load->view('footer');
 		}
 		else
 		{
-			echo '<h1>User Creation Error(s)</h1>' . validation_errors();
-		}
+			$user_data = [
+				'username'   => $this->input->post("username"),
+				'passwd'     => $this->input->post("passwd"),
+				'email'      => $this->input->post("email"),
+				'auth_level' => '1',
+			];
 
-		echo $this->load->view('footer');
+			$this->is_logged_in();
+
+			// Load resources
+			$this->load->helper('auth');
+			$this->load->model('examples/examples_model');
+			$this->load->model('examples/validation_callables');
+			$this->load->library('form_validation');
+
+			$this->form_validation->set_data( $user_data );
+
+			$validation_rules = [
+				[
+					'field' => 'username',
+					'label' => 'username',
+					'rules' => 'max_length[12]|is_unique[' . db_table('user_table') . '.username]',
+					'errors' => [
+						'is_unique' => 'Username already in use.'
+					]
+				],
+				[
+					'field' => 'passwd',
+					'label' => 'passwd',
+					'rules' => [
+						'trim',
+						'required',
+						[ 
+							'_check_password_strength', 
+							[ $this->validation_callables, '_check_password_strength' ] 
+						]
+					],
+					'errors' => [
+						'required' => 'The password field is required.'
+					]
+				],
+				[
+					'field'  => 'email',
+					'label'  => 'email',
+					'rules'  => 'trim|required|valid_email|is_unique[' . db_table('user_table') . '.email]',
+					'errors' => [
+						'is_unique' => 'Email address already in use.'
+					]
+				],
+				[
+					'field' => 'auth_level',
+					'label' => 'auth_level',
+					'rules' => 'required|integer|in_list[1,6,9]'
+				]
+			];
+
+			$this->form_validation->set_rules( $validation_rules );
+
+			if( $this->form_validation->run() )
+			{
+				$user_data['passwd']     = $this->authentication->hash_passwd($user_data['passwd']);
+				$user_data['user_id']    = $this->examples_model->get_unused_id();
+				$user_data['created_at'] = date('Y-m-d H:i:s');
+
+				// If username is not used, it must be entered into the record as NULL
+				if( empty( $user_data['username'] ) )
+				{
+					$user_data['username'] = NULL;
+				}
+
+				$this->db->set($user_data)
+					->insert(db_table('user_table'));
+
+				if( $this->db->affected_rows() == 1 )
+					echo '<div class="uk-alert-success" uk-alert>
+    			<a class="uk-alert-close" uk-close></a>
+    			<h1>Congratulations</h1>' . '<p>User ' . $user_data['username'] . ' was created.</p><a href="/stuckabovebook/examples/login_form">You can login now.</a>
+    			</div>';
+			}
+			else
+			{
+				echo '<div class="uk-alert-danger" uk-alert>
+    			<a class="uk-alert-close" uk-close></a>
+    			' . validation_errors().'</div>';
+			}
+			$this->load->view('examples/create_account_form');
+			$this->load->view('footer');
+		}
 	}
 	
 	// -----------------------------------------------------------------------

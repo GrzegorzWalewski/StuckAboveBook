@@ -42,7 +42,7 @@ if( isset( $validation_passed ) )
 				You have successfully changed your password.
 			</p>
 			<p>
-				You can now <a href="/' . LOGIN_PAGE . '">login</a>
+				You can now <a href="/stuckAboveBook/examples/login_form">login</a>
 			</p>
 		</div>
 	';
@@ -121,7 +121,7 @@ if( $showform == 1 )
 									'id'         => 'passwd',
 									'class'      => 'form_input password uk-margin-top uk-input',
 									'max_length' => config_item('max_chars_for_password'),
-									'placeholder'=>	'Passoword'
+									'placeholder'=>	'Password'
 								];
 								echo form_password($input_data);
 							?>
@@ -158,9 +158,10 @@ if( $showform == 1 )
 								$input_data = [
 									'name'  => 'form_submit',
 									'id'    => 'submit_button',
-									'value' => 'Change Password'
+									'value' => 'Change'
 								];
-								echo form_submit($input_data,'','class="uk-button uk-margin-top"');
+								echo form_submit($input_data,'','class="uk-button uk-margin-top blue"');
+								echo '<input class=" uk-margin-top uk-button right-in-parent" formaction="<?php echo base_url() ?>" type="submit" name="submit" value="Home" id="submit_button"  />';
 							?>
 
 						</div>
