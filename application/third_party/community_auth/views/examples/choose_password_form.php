@@ -52,8 +52,7 @@ if( isset( $validation_passed ) )
 if( isset( $recovery_error ) )
 {
 	echo '
-	<div class="form">
-		<div class="uk-alert-danger">
+		<div class="uk-alert-danger padding_45 form">
 			<p>
 				No usable data for account recovery.
 			</p>
@@ -61,7 +60,7 @@ if( isset( $recovery_error ) )
 				Account recovery links expire after 
 				' . ( (int) config_item('recovery_code_expiration') / ( 60 * 60 ) ) . ' 
 				hours.<br />You will need to use the 
-				<a href="/examples/recover">Account Recovery</a> form 
+				<a href="'.base_url().'examples/recover">Account Recovery</a> form 
 				to send yourself a new link.
 			</p>
 		</div>
@@ -72,14 +71,14 @@ if( isset( $recovery_error ) )
 if( isset( $disabled ) )
 {
 	echo '
-	<div class="form">
-		<div class="uk-alert-danger">
+		<div class="form uk-alert-danger padding_45">
 			<p>
-				Account recovery is disabled.
+				Account Recovery is Disabled.
 			</p>
 			<p>
-				You have exceeded the maximum login attempts or exceeded the 
-				allowed number of password recovery attempts. 
+				If you have exceeded the maximum login attempts, or exceeded
+				the allowed number of password recovery attempts, account recovery 
+				will be disabled for a short period of time. 
 				Please wait ' . ( (int) config_item('seconds_on_hold') / 60 ) . ' 
 				minutes, or contact us if you require assistance gaining access to your account.
 			</p>

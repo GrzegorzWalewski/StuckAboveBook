@@ -34,7 +34,7 @@ if( isset( $disabled ) )
 else if( isset( $banned ) )
 {
 	echo '
-		<div class="fform uk-alert-danger padding_45">
+		<div class="form uk-alert-danger padding_45">
 			<p>
 				Account Locked.
 			</p>
