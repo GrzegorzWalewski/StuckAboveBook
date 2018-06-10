@@ -37,7 +37,7 @@ if( ! isset( $on_hold_message ) )
 		';
 	}
 	echo '<div class="form">';
-	echo form_open( $login_url, ['class' => 'std-form'] ); 
+	echo form_open( $login_url, ['class' => 'std-form','id' => 'login_form'] ); 
 ?>
 
 	<div>
@@ -96,7 +96,7 @@ if( ! isset( $on_hold_message ) )
 
 
 		<input class="uk-button blue" type="submit" name="submit" value="Login" id="submit_button"  />
-		<input class="uk-button right-in-parent" formaction="<?php echo base_url() ?>" type="submit" name="submit" value="Home" id="submit_button"  />
+		<input class="uk-button right-in-parent" formaction="<?php echo base_url() ?>" type="submit" name="submit" value="Home" />
 
 	</div>
 </form>
@@ -126,6 +126,23 @@ if( ! isset( $on_hold_message ) )
 			</div>
 		';
 	}
+?>
+<script type="text/javascript">
+	var validator = new My_Validator;
+	var submitButton = document.getElementById("submit_button");
+	var loginInput = document.getElementById("login_string");
+	var passInput = document.getElementById("login_pass");
+	var form = document.getElementById("login_form");
 
-/* End of file login_form.php */
-/* Location: /community_auth/views/examples/login_form.php */ 
+	loginInput.addEventListener("keyup", function() {
+    	validator.validate(loginInput,submitButton,"username");
+}); 
+
+	passInput.addEventListener("keyup", function() {
+    	validator.validate(passInput,submitButton,"password");
+}); 
+	var formInputs = [loginInput, passInput];
+	submitButton.addEventListener("click",function(event){
+		validator.submit(submitButton,formInputs,event);
+	});
+</script>

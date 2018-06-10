@@ -1,16 +1,51 @@
 class My_Validator
 {
-	mail(my_mail){
-		var mailValidate = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
-		return mailValidate.test(my_mail);
+	validate(my_input,submitButton,type){
+
+		switch(type)
+		{
+			case "password":
+			var regExp = new RegExp(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9\S]{8,})$/)
+			break;
+			case "username":
+			var regExp = new RegExp("[0-9a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{6,10}");
+			break;
+			case "mail":
+			var regExp = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
+			break;
+			default:
+			alert("Your validator is set wrong!");
+			break;
+		}
+		my_input.className = my_input.className.replace("uk-form-danger","");
+		my_input.className = my_input.className.replace("uk-form-success","");
+
+		var inputValue = my_input.value;
+		var result = regExp.test(inputValue);
+		if(inputValue != "")
+		{
+			if(result)
+			{
+				my_input.className += " uk-form-success";
+				submitButton.removeAttribute("disabled");
+			}
+			else
+			{
+				my_input.className += " uk-form-danger";
+				submitButton.setAttribute("disabled","");
+			}
+		}
 	}
-	password(my_pass){
-		var passValidate = new RegExp(/^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])([a-zA-Z0-9\S]{8,})$/);
-		return passValidate.test(my_pass);
-	}
-	username(my_username)
+	submit(submitButton,form,event)
 	{
-		var usernameValidate = new RegExp("[0-9a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{6,10}");
-		return usernameValidate.test(my_username);
+		for(var i=0;i<form.length;i++)
+		{
+			if(form[i].value=="")
+			{
+				form[i].className += " uk-form-danger";
+				submitButton.setAttribute("disabled","");
+				event.preventDefault();
+			}
+		}
 	}
 }
