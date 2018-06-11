@@ -14,6 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 ?>
 <?php
+$this->load->view('header');
 if( isset( $disabled ) )
 {
 	echo '
@@ -34,7 +35,7 @@ if( isset( $disabled ) )
 else if( isset( $banned ) )
 {
 	echo '
-		<div class="fform uk-alert-danger padding_45">
+		<div class="form uk-alert-danger padding_45">
 			<p>
 				Account Locked.
 			</p>
@@ -105,7 +106,7 @@ if( isset( $show_form ) )
 {
 	?>
 
-		 <?php echo form_open(); ?>
+		 <?php echo form_open("",['id' => 'recovery_form']); ?>
 			<div>
 					<legend>Enter your account's email address:</legend>
 					<div>
@@ -134,7 +135,8 @@ if( isset( $show_form ) )
 								'id'    => 'submit_button',
 								'value' => 'Send Email'
 							];
-							echo form_submit($input_data,'','class="uk-margin-top uk-button"');
+							echo form_submit($input_data,'','class="uk-margin-top uk-button blue"');
+							echo '<input class="uk-button uk-margin-top right-in-parent" formaction="<?php echo base_url() ?>" type="submit" name="submit" value="Home" id="submit_button"  />';
 						?>
 
 					</div>
@@ -144,5 +146,18 @@ if( isset( $show_form ) )
 	</div>
 	<?php
 }
-/* End of file recover_form.php */
-/* Location: /community_auth/views/examples/recover_form.php */
+?>
+<script type="text/javascript">
+	var validator = new My_Validator;
+	var submitButton = document.getElementById("submit_button");
+	var mailInput = document.getElementById("email");
+	var form = document.getElementById("recovery_form");
+	var formInputs = [mailInput];
+
+	mailInput.addEventListener("keyup", function() {
+    	validator.validate(mailInput,submitButton,"mail");
+}); 
+	submitButton.addEventListener("click",function(event){
+		validator.submit(submitButton,formInputs,event);
+	});
+</script>

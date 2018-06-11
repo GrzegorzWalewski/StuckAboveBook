@@ -269,7 +269,7 @@ class Examples extends MY_Controller
 				if( $this->db->affected_rows() == 1 )
 					echo '<div class="uk-alert-success" uk-alert>
     			<a class="uk-alert-close" uk-close></a>
-    			<h1>Congratulations</h1>' . '<p>User ' . $user_data['username'] . ' was created.</p><a href="/stuckabovebook/examples/login_form">You can login now.</a>
+    			<h1>Congratulations</h1>' . '<p>User ' . $user_data['username'] . ' was created.</p><a href="/stuckAboveBook/examples/login_form">You can login now.</a>
     			</div>';
 			}
 			else

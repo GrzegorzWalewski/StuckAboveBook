@@ -48,4 +48,19 @@ class My_Validator
 			}
 		}
 	}
+	passConfirm(passInput,confirmInput,submitButton)
+	{
+		confirmInput.className = confirmInput.className.replace("uk-form-danger","");
+		confirmInput.className = confirmInput.className.replace("uk-form-success","");
+		if(passInput.value!==confirmInput.value)
+		{
+			confirmInput.className += " uk-form-danger";
+			submitButton.setAttribute("disabled","");
+		}
+		else
+		{
+			confirmInput.className += " uk-form-success";
+			submitButton.removeAttribute("disabled");
+		}
+	}
 }

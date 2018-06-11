@@ -14,6 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 ?>
 <?php
+$this->load->view('header');
 if( isset( $disabled ) )
 {
 	echo '
@@ -105,7 +106,7 @@ if( isset( $show_form ) )
 {
 	?>
 
-		 <?php echo form_open(); ?>
+		 <?php echo form_open("",['id' => 'recovery_form']); ?>
 			<div>
 					<legend>Enter your account's email address:</legend>
 					<div>
@@ -145,5 +146,18 @@ if( isset( $show_form ) )
 	</div>
 	<?php
 }
-/* End of file recover_form.php */
-/* Location: /community_auth/views/examples/recover_form.php */
+?>
+<script type="text/javascript">
+	var validator = new My_Validator;
+	var submitButton = document.getElementById("submit_button");
+	var mailInput = document.getElementById("email");
+	var form = document.getElementById("recovery_form");
+	var formInputs = [mailInput];
+
+	mailInput.addEventListener("keyup", function() {
+    	validator.validate(mailInput,submitButton,"mail");
+}); 
+	submitButton.addEventListener("click",function(event){
+		validator.submit(submitButton,formInputs,event);
+	});
+</script>

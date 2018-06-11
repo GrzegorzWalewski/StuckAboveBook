@@ -12,6 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @license     BSD - http://www.opensource.org/licenses/BSD-3-Clause
  * @link        http://community-auth.com
  */
+$this->load->view("header");
 if( ! isset( $on_hold_message ) )
 {
 	if( isset( $login_error_mesg ) )
@@ -20,7 +21,7 @@ if( ! isset( $on_hold_message ) )
 			<div class="uk-alert-danger" uk-alert>
     			<a class="uk-alert-close" uk-close></a>
     			<p>
-					Invalid Username, Email Address, or Password.
+					Invalid Username or Password.
 				</p>
 			</div>
 		';
@@ -37,12 +38,12 @@ if( ! isset( $on_hold_message ) )
 		';
 	}
 	echo '<div class="form">';
-	echo form_open( $login_url, ['class' => 'std-form'] ); 
+	echo form_open( $login_url, ['class' => 'std-form','id' => 'login_form'] ); 
 ?>
 
 	<div>
 		<div class="uk-margin">
-			<label for="login_string" class="form_label">Username or Email</label>
+			<label for="login_string" class="form_label">Username</label>
 			<br>
         	<div class="uk-inline">
         	<a class="uk-form-icon" href="#" uk-icon="icon: user"></a>
@@ -57,7 +58,7 @@ if( ! isset( $on_hold_message ) )
 		<label for="login_pass" class="form_label">Password</label>
 		<br>
         <div class="uk-inline">
-		<a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: lock"></a>
+		<a class="uk-form-icon  " href="#" uk-icon="icon: lock"></a>
 		<input type="password" name="login_pass" id="login_pass" class="uk-input password" <?php 
 			if( config_item('max_chars_for_password') > 0 )
 				echo 'maxlength="' . config_item('max_chars_for_password') . '"'; 
@@ -80,7 +81,7 @@ if( ! isset( $on_hold_message ) )
 			}
 		?>
 
-		<p>
+		<p class="no-bottom-margin">
 			<?php
 				$link_protocol = USE_SSL ? 'https' : NULL;
 			?>
@@ -88,9 +89,15 @@ if( ! isset( $on_hold_message ) )
 				Can't access your account?
 			</a>
 		</p>
+		<p class="no-top-margin">
+			<a href="<?php echo site_url('examples/create_user', $link_protocol); ?>">
+				Don't have account yet?
+			</a>
+		</p>
 
 
-		<input class="uk-button" type="submit" name="submit" value="Login" id="submit_button"  />
+		<input class="uk-button blue" type="submit" name="submit" value="Login" id="submit_button"  />
+		<input class="uk-button right-in-parent" formaction="<?php echo base_url() ?>" type="submit" name="submit" value="Home" />
 
 	</div>
 </form>
@@ -114,12 +121,29 @@ if( ! isset( $on_hold_message ) )
 					Your access to login and account recovery has been blocked for ' . ( (int) config_item('seconds_on_hold') / 60 ) . ' minutes.
 				</p>
 				<p>
-					Please use the <a href="/examples/recover">Account Recovery</a> after ' . ( (int) config_item('seconds_on_hold') / 60 ) . ' minutes has passed,<br />
+					Please use the <a href="examples/recover">Account Recovery</a> after ' . ( (int) config_item('seconds_on_hold') / 60 ) . ' minutes has passed,<br />
 					or contact us if you require assistance gaining access to your account.
 				</p>
 			</div>
 		';
 	}
+?>
+<script type="text/javascript">
+	var validator = new My_Validator;
+	var submitButton = document.getElementById("submit_button");
+	var loginInput = document.getElementById("login_string");
+	var passInput = document.getElementById("login_pass");
+	var form = document.getElementById("login_form");
+	var formInputs = [loginInput, passInput];
 
-/* End of file login_form.php */
-/* Location: /community_auth/views/examples/login_form.php */ 
+	loginInput.addEventListener("keyup", function() {
+    	validator.validate(loginInput,submitButton,"username");
+}); 
+
+	passInput.addEventListener("keyup", function() {
+    	validator.validate(passInput,submitButton,"password");
+}); 
+	submitButton.addEventListener("click",function(event){
+		validator.submit(submitButton,formInputs,event);
+	});
+</script>

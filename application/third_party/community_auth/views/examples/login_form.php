@@ -12,6 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  * @license     BSD - http://www.opensource.org/licenses/BSD-3-Clause
  * @link        http://community-auth.com
  */
+$this->load->view("header");
 if( ! isset( $on_hold_message ) )
 {
 	if( isset( $login_error_mesg ) )
@@ -20,7 +21,7 @@ if( ! isset( $on_hold_message ) )
 			<div class="uk-alert-danger" uk-alert>
     			<a class="uk-alert-close" uk-close></a>
     			<p>
-					Invalid Username, Email Address, or Password.
+					Invalid Username or Password.
 				</p>
 			</div>
 		';
@@ -42,7 +43,7 @@ if( ! isset( $on_hold_message ) )
 
 	<div>
 		<div class="uk-margin">
-			<label for="login_string" class="form_label">Username or Email</label>
+			<label for="login_string" class="form_label">Username</label>
 			<br>
         	<div class="uk-inline">
         	<a class="uk-form-icon" href="#" uk-icon="icon: user"></a>
@@ -57,7 +58,7 @@ if( ! isset( $on_hold_message ) )
 		<label for="login_pass" class="form_label">Password</label>
 		<br>
         <div class="uk-inline">
-		<a class="uk-form-icon uk-form-icon-flip" href="#" uk-icon="icon: lock"></a>
+		<a class="uk-form-icon  " href="#" uk-icon="icon: lock"></a>
 		<input type="password" name="login_pass" id="login_pass" class="uk-input password" <?php 
 			if( config_item('max_chars_for_password') > 0 )
 				echo 'maxlength="' . config_item('max_chars_for_password') . '"'; 
@@ -89,7 +90,7 @@ if( ! isset( $on_hold_message ) )
 			</a>
 		</p>
 		<p class="no-top-margin">
-			<a href="<?php echo site_url('examples/create_account_form', $link_protocol); ?>">
+			<a href="<?php echo site_url('examples/create_user', $link_protocol); ?>">
 				Don't have account yet?
 			</a>
 		</p>
@@ -133,6 +134,7 @@ if( ! isset( $on_hold_message ) )
 	var loginInput = document.getElementById("login_string");
 	var passInput = document.getElementById("login_pass");
 	var form = document.getElementById("login_form");
+	var formInputs = [loginInput, passInput];
 
 	loginInput.addEventListener("keyup", function() {
     	validator.validate(loginInput,submitButton,"username");
@@ -141,7 +143,6 @@ if( ! isset( $on_hold_message ) )
 	passInput.addEventListener("keyup", function() {
     	validator.validate(passInput,submitButton,"password");
 }); 
-	var formInputs = [loginInput, passInput];
 	submitButton.addEventListener("click",function(event){
 		validator.submit(submitButton,formInputs,event);
 	});

@@ -108,7 +108,7 @@ if( $showform == 1 )
 
 		?>
 			<div class="form">
-				<?php echo form_open(); ?>
+				<?php echo form_open('',['id' => "choose_pass_form"]); ?>
 						<legend>Choose your new password</legend>
 						<div>
 
@@ -172,6 +172,25 @@ if( $showform == 1 )
 		<?php
 	}
 }
+?>
+<script type="text/javascript">
+	var validator = new My_Validator;
+	var submitButton = document.getElementById("submit_button");
+	var confirmInput = document.getElementById("passwd_confirm");
+	var passInput = document.getElementById("passwd");
+	var form = document.getElementById("choose_pass_form");
+	var formInputs = [confirmInput, passInput];
 
-/* End of file choose_password_form.php */
-/* Location: /community_auth/views/examples/choose_password_form.php */
+	passInput.addEventListener("keyup", function() {
+    	validator.validate(passInput,submitButton,"password");
+    	validator.passConfirm(passInput,confirmInput,submitButton);
+	}); 
+
+	submitButton.addEventListener("click",function(event){
+		validator.submit(submitButton,formInputs,event);
+	});
+
+	confirmInput.addEventListener("keyup", function(){
+	validator.passConfirm(passInput,confirmInput,submitButton);
+	});
+</script>

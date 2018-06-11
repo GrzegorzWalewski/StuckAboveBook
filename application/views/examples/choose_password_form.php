@@ -14,25 +14,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
  */
 ?>
 
-<h1>Account Recovery - Stage 2</h1>
-
 <?php
-
+$this->load->view('header');
 $showform = 1;
 
 if( isset( $validation_errors ) )
 {
 	echo '
-		<div style="border:1px solid red;">
-			<p>
+		<div class="uk-alert-danger" uk-alert>
+    			<a class="uk-alert-close" uk-close></a>
 				The following error occurred while changing your password:
-			</p>
-			<ul>
 				' . $validation_errors . '
-			</ul>
-			<p>
-				PASSWORD NOT UPDATED
-			</p>
 		</div>
 	';
 }
@@ -44,12 +36,13 @@ else
 if( isset( $validation_passed ) )
 {
 	echo '
-		<div style="border:1px solid green;">
+		<div class="uk-alert-success" uk-alert>
+    			<a class="uk-alert-close" uk-close></a>
 			<p>
 				You have successfully changed your password.
 			</p>
 			<p>
-				You can now <a href="/' . LOGIN_PAGE . '">login</a>
+				You can now <a href="/stuckAboveBook/examples/login_form">login</a>
 			</p>
 		</div>
 	';
@@ -59,7 +52,7 @@ if( isset( $validation_passed ) )
 if( isset( $recovery_error ) )
 {
 	echo '
-		<div style="border:1px solid red;">
+		<div class="uk-alert-danger padding_45 form">
 			<p>
 				No usable data for account recovery.
 			</p>
@@ -67,7 +60,7 @@ if( isset( $recovery_error ) )
 				Account recovery links expire after 
 				' . ( (int) config_item('recovery_code_expiration') / ( 60 * 60 ) ) . ' 
 				hours.<br />You will need to use the 
-				<a href="/examples/recover">Account Recovery</a> form 
+				<a href="'.base_url().'examples/recover">Account Recovery</a> form 
 				to send yourself a new link.
 			</p>
 		</div>
@@ -78,13 +71,14 @@ if( isset( $recovery_error ) )
 if( isset( $disabled ) )
 {
 	echo '
-		<div style="border:1px solid red;">
+		<div class="form uk-alert-danger padding_45">
 			<p>
-				Account recovery is disabled.
+				Account Recovery is Disabled.
 			</p>
 			<p>
-				You have exceeded the maximum login attempts or exceeded the 
-				allowed number of password recovery attempts. 
+				If you have exceeded the maximum login attempts, or exceeded
+				the allowed number of password recovery attempts, account recovery 
+				will be disabled for a short period of time. 
 				Please wait ' . ( (int) config_item('seconds_on_hold') / 60 ) . ' 
 				minutes, or contact us if you require assistance gaining access to your account.
 			</p>
@@ -101,7 +95,7 @@ if( $showform == 1 )
 		{
 			if( isset( $username ) )
 			{
-				echo '<p>
+				echo '<div class="form"><p>
 					Your login user name is <i>' . $username . '</i><br />
 					Please write this down, and change your password now:
 				</p>';
@@ -113,21 +107,21 @@ if( $showform == 1 )
 		}
 
 		?>
-			<div id="form">
-				<?php echo form_open(); ?>
-					<fieldset>
-						<legend>Step 2 - Choose your new password</legend>
+			<div class="form">
+				<?php echo form_open('',['id' => "choose_pass_form"]); ?>
+						<legend>Choose your new password</legend>
 						<div>
 
 							<?php
 								// PASSWORD LABEL AND INPUT ********************************
-								echo form_label('Password','passwd', ['class'=>'form_label']);
+								echo form_label('','passwd', ['class'=>'form_label']);
 
 								$input_data = [
 									'name'       => 'passwd',
 									'id'         => 'passwd',
-									'class'      => 'form_input password',
-									'max_length' => config_item('max_chars_for_password')
+									'class'      => 'form_input password uk-margin-top uk-input',
+									'max_length' => config_item('max_chars_for_password'),
+									'placeholder'=>	'Password'
 								];
 								echo form_password($input_data);
 							?>
@@ -137,19 +131,19 @@ if( $showform == 1 )
 
 							<?php
 								// CONFIRM PASSWORD LABEL AND INPUT ******************************
-								echo form_label('Confirm Password','passwd_confirm', ['class'=>'form_label']);
+								echo form_label('','passwd_confirm', ['class'=>'form_label']);
 
 								$input_data = [
 									'name'       => 'passwd_confirm',
 									'id'         => 'passwd_confirm',
-									'class'      => 'form_input password',
-									'max_length' => config_item('max_chars_for_password')
+									'class'      => 'form_input password uk-margin-top uk-input',
+									'max_length' => config_item('max_chars_for_password'),
+									'placeholder'=>	'Confirm password'
 								];
 								echo form_password($input_data);
 							?>
 
 						</div>
-					</fieldset>
 					<div>
 						<div>
 
@@ -164,17 +158,39 @@ if( $showform == 1 )
 								$input_data = [
 									'name'  => 'form_submit',
 									'id'    => 'submit_button',
-									'value' => 'Change Password'
+									'value' => 'Change'
 								];
-								echo form_submit($input_data);
+								echo form_submit($input_data,'','class="uk-button uk-margin-top blue"');
+								echo '<input class=" uk-margin-top uk-button right-in-parent" formaction="<?php echo base_url() ?>" type="submit" name="submit" value="Home" id="submit_button"  />';
 							?>
 
 						</div>
 					</div>
 				</form>
 			</div>
+		</div>
 		<?php
 	}
 }
-/* End of file choose_password_form.php */
-/* Location: /community_auth/views/examples/choose_password_form.php */
+?>
+<script type="text/javascript">
+	var validator = new My_Validator;
+	var submitButton = document.getElementById("submit_button");
+	var confirmInput = document.getElementById("passwd_confirm");
+	var passInput = document.getElementById("passwd");
+	var form = document.getElementById("choose_pass_form");
+	var formInputs = [confirmInput, passInput];
+
+	passInput.addEventListener("keyup", function() {
+    	validator.validate(passInput,submitButton,"password");
+    	validator.passConfirm(passInput,confirmInput,submitButton);
+	}); 
+
+	submitButton.addEventListener("click",function(event){
+		validator.submit(submitButton,formInputs,event);
+	});
+
+	confirmInput.addEventListener("keyup", function(){
+	validator.passConfirm(passInput,confirmInput,submitButton);
+	});
+</script>
