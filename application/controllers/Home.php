@@ -30,35 +30,20 @@ class Home extends MY_Controller {
         if(!empty($this->uri->segment(3)))
         {
             $categoryId=$this->uri->segment(3);
-            $this->load->model("download_Model");
-            $data['books']=$this->download_Model->getBooksByCategoryId($categoryId);
+            $this->load->model("download_model");
+            $data['books']=$this->download_model->getBooksByCategoryId($categoryId);
             $this->load->view('books/contents',$data);
             $this->load->view('footer');
         }
 		else
         {
-        $this->load->model("download_Model");
-		$data['categorylist']=$this->download_Model->getCategory();
+        $this->load->model("download_model");
+		$data['categorylist']=$this->download_model->getCategory();
 		$this->load->view('categories/contents',$data);
 		$this->load->view('footer');
             
             
         }
-	}
-	public function loadCategories()
-	{
-		$data['q']=$this->uri->segment(3);
-		$this->load->model("download_Model");
-		$data['categorylist']=$this->download_Model->getCategory();
-		$this->load->view('helpers/categoriesAJAX',$data);
-	}
-	public function loadBooks()
-	{ 
-		$data['categoryId']=$this->uri->segment(3);
-		$data['q']=$this->uri->segment(4);
-		$this->load->model("download_Model");
-		$data['bookslist']=$this->download_Model->getBooksByCategoryId($data['categoryId']);
-		$this->load->view('helpers/booksAJAX',$data);
 	}
 	public function addBooks()
 	{    
@@ -71,16 +56,18 @@ class Home extends MY_Controller {
 		if(!empty($this->input->post("str")))
         {
            $str = $this->input->post("str");
-			$this->load->model('upload_Model');
-			$this->upload_Model->uploadBookAndCategory($str);
+			var_dump($str);
+			$this->load->model('upload_model');
+			$this->upload_model->uploadBookAndCategory($str);
+			redirect("/home/addbook/added");
 		}
     }
 	public function addProblem()
 	{
 		if(!null==$this->input->post('categoryId'))
 		{
-			$this->load->model('upload_Model');
-			$this->upload_Model->uploadProblem($this->input->post('categoryId'),
+			$this->load->model('upload_model');
+			$this->upload_model->uploadProblem($this->input->post('categoryId'),
 				$this->input->post('bookId'),
 				$this->input->post('fromPage'),
 				$this->input->post('toPage'),
@@ -99,5 +86,14 @@ class Home extends MY_Controller {
         }
 		$this->load->view('book/contents');
 		$this->load->view('footer');
+	}
+	public function search()
+	{
+		$this->load->view('search/content');
+		$this->load->view('footer');
+	}
+	public function ajaxSearch()
+	{
+		
 	}
 }

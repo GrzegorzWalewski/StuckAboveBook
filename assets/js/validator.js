@@ -13,6 +13,9 @@ class My_Validator
 			case "mail":
 			var regExp = new RegExp("^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
 			break;
+			case "text":
+			var regExp = new RegExp("[0-9a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{6,200}");
+			break;
 			default:
 			alert("Your validator is set wrong!");
 			break;

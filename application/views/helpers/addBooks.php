@@ -2,6 +2,9 @@
 <p id="author"></p>
 <p id="pages"></p>
 <p id="category"></p>
+<form id="str_form" action="/stuckAboveBook/home/addBooks/" method="post">
+<input id="str" name="str"/>
+</form>
 <script type="text/javascript" charset="utf-8">
     var str="I hate this job";
   window.onload = function ()
@@ -20,11 +23,6 @@
 
     var category=document.getElementById("content").children[0].children[4].children[0].children[0].children[1].innerText;
     category=category.replace("» ","");
-    document.getElementsByTagName("body")[0].innerHTML="<p id='title'></p><p id='author'></p><p id='pages'></p><p id='category'></p>";
-    document.getElementById("title").innerText=title;
-    document.getElementById("author").innerText=author;
-    document.getElementById("pages").innerText=pages;
-    document.getElementById("category").innerText=category;
     str = title+"/"+author+"/"+pages+"/"+category;
       setTimeout(function(){ passVal(); },0);
   }
@@ -32,8 +30,8 @@
         var data = {
             str: str
         };
-
-        $.post("/stuckAboveBook/home/addBooks/", data);
+        document.getElementById("str").value=str;
+        document.getElementById("str_form").submit(); 
       goBack();
     }
     function goBack(){

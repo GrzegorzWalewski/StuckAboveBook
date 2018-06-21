@@ -1,7 +1,6 @@
 
 <?php
 $x=$categorylist;
-
 //get the q parameter from URL
 $hint="";
 //lookup all links from the xml file if length of q>0
@@ -10,7 +9,6 @@ if (strlen($q)>0) {
   {
     $y=$category->name;
     $z=$category->id;
-
     if (stristr($y,$q)) {
         if ($hint=="") {
           $hint="<option onclick='chooseCategory(this)' class=\"change-onhover\" value='" .
