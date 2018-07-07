@@ -90,6 +90,18 @@ class Home extends MY_Controller {
 	public function search()
 	{
 		$this->load->view('search/content');
+		if(!null==$this->input->post('categoryId'))
+		{
+
+			$this->load->model('download_model');
+			$data['problems'] = $this->download_model->searchProblem($this->input->post('categoryId'),
+			$this->input->post('bookId'),
+			$this->input->post('fromPage'),
+			$this->input->post('toPage'))->result();
+
+			$this->load->view('search/result',$data);
+
+		}
 		$this->load->view('footer');
 	}
 	public function ajaxSearch()
