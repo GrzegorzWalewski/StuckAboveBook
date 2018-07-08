@@ -26,4 +26,19 @@ Class Download_model extends CI_Model
 			$r=$this->db->get('posts');
 			return $r;
 		}
+		public function problemById($id)
+		{
+			$this->db->select('*');
+			$this->db->where('posts.id',$id);
+			$this->db->from('posts');
+			$this->db->join('users','users.user_id = posts.author_id');
+			return $this->db->get();
+		}
+		public function problemAnswers($id)
+		{
+			$this->db->where('post_id',$id);
+			$this->db->from('answers');
+			$this->db->join('users','users.user_id = answers.author_id');
+			return $this->db->get();
+		}
 }

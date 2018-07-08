@@ -75,7 +75,7 @@ class Home extends MY_Controller {
 			$this->load->view('messages/added');
 
 		}
-		$this->load->view('problem/contents');
+		$this->load->view('addProblem/contents');
 		$this->load->view('footer');
 	}
 	public function addBook()
@@ -104,8 +104,12 @@ class Home extends MY_Controller {
 		}
 		$this->load->view('footer');
 	}
-	public function ajaxSearch()
+	public function problem()
 	{
-		
+		$id=$this->uri->segment(3);
+		$this->load->model('download_model');
+		$data['problem']=$this->download_model->problemById($id)->result()[0];
+		$data['answers']=$this->download_model->problemAnswers($id)->result();
+		$this->load->view('problem/content',$data);
 	}
 }

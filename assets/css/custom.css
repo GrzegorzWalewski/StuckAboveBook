@@ -98,3 +98,7 @@ html body nav.uk-navbar-container.uk-margin.uk-navbar{
 	position: absolute;
 	right: 0;
 }
+.border-bottom
+{
+	border-bottom: 1px;
+}
