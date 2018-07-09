@@ -22,7 +22,7 @@ Class Download_model extends CI_Model
 			$this->db->where('book_id',$bookId);
 			$this->db->where('page_from <=',$fromPage);
 			$this->db->where('page_to >=',$toPage);
-			$this->db->select('problem');
+			$this->db->select('problem, id');
 			$r=$this->db->get('posts');
 			return $r;
 		}

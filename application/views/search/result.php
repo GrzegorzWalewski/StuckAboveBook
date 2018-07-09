@@ -3,7 +3,7 @@
 	<?php
 	foreach($problems as $problem)
 	{
-		echo "<li>".$problem->problem."</li>";
+		echo "<li><a href='/stuckAboveBook/home/problem/".$problem->id."'>".$problem->problem."</a></li>";
 	}
 	if(empty($problems))
 		{
