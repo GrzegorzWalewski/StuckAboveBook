@@ -41,4 +41,9 @@ Class Download_model extends CI_Model
 			$this->db->join('users','users.user_id = answers.author_id');
 			return $this->db->get();
 		}
+		public function problemsByUser($id)
+		{
+			$this->db->where('author_id',$id);
+			return $this->db->get('posts');
+		}
 }

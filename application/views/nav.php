@@ -26,7 +26,7 @@
                         <div class="uk-navbar-dropdown">
                             <ul class="uk-nav uk-navbar-dropdown-nav">
                                 <li class=""><a href="#">Twój profil</a></li>
-                                <li class=""><a href="#">Twoje pytania</a></li>
+                                <li class=""><a href="/stuckAboveBook/user/yourproblems">Twoje pytania</a></li>
                                 <li class=""><a href="/stuckAboveBook/examples/logout">Wyloguj</a></li>
                             </ul>
                         </div>
