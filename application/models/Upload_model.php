@@ -5,14 +5,16 @@ Class Upload_model extends CI_Model
 			parent::_construct;
 			$this->load->database();
 		}
-		public function uploadProblem($categoryId,$bookId,$fromPage,$toPage,$post)
+		public function uploadProblem($categoryId,$bookId,$fromPage,$toPage,$post,$name)
 		{
 			$data=array(
-				'categoryid' => $categoryId,
-				'problem' => $post,
+				'categoryid'=> $categoryId,
+				'problem' 	=> $post,
 				'page_from' => $fromPage,
-				'page_to' => $toPage,
-				'book_id' => $bookId);
+				'page_to' 	=> $toPage,
+				'book_id' 	=> $bookId,
+				'author_id' => $this->auth_user_id,
+				'name'		=> $name);
 			$this->db->insert('posts',$data);
 
 		}

@@ -71,7 +71,9 @@ class Home extends MY_Controller {
 				$this->input->post('bookId'),
 				$this->input->post('fromPage'),
 				$this->input->post('toPage'),
-				$this->input->post('post'));
+				$this->input->post('post'),
+				$this->input->post('name')
+				);
 			$this->load->view('messages/added');
 
 		}

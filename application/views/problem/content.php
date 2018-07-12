@@ -19,7 +19,7 @@
       }
       if(empty($answers))
       {
-        echo "Jeszcze nikt nie zna odpowiedzi";
+        echo "Jeszcze nikt nie zna odpowiedzi</br> ";
       }
       echo "<a>Dodaj Swoja odpowiedz</a>";
       ?>

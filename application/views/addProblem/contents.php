@@ -23,6 +23,9 @@
 		</div>
 
 		<div class="uk-width-1-1 uk-text-center uk-margin-small-top uk-padding uk-margin-large-left uk-margin-large-right blue">
+      <div class="uk-margin">
+        <input autocomplete="off" class="uk-input uk-form-medium uk-form-width-large blue no-border" type="text" placeholder="Tytul" name="name" required>
+      </div>
 			<div class="uk-margin">
             	<textarea autocomplete="off" name="post" class="uk-textarea no-border" rows="8" placeholder="Tu opisz swój problem" required></textarea>
         	</div>
