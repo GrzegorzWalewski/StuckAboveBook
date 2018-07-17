@@ -1,4 +1,5 @@
-Customize problem pages
+Add functionality to rate buttons
 ------DONE-----------
 Add problem pages
 Add links to problems
+Customize problem pages

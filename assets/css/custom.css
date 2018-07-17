@@ -102,3 +102,19 @@ html body nav.uk-navbar-container.uk-margin.uk-navbar{
 {
 	border-bottom: 1px;
 }
+.margin-left--40
+{
+	margin-left: -40px;
+}
+.inline-block
+{
+	display: inline-block;
+}
+.answer
+{
+	background-color: orange;
+}
+.no-left-margin
+{
+	margin-left: 0px!important;
+}

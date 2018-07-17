@@ -13,4 +13,5 @@
     <script type="text/javascript" src="<?php echo base_url() ?>assets/js/validator.js"></script>
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/uikit.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/css/custom.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.0/css/all.css" integrity="sha384-lKuwvrZot6UHsBSfcMvOkWwlCMgc0TaWr+30HWe3a4ltaBwTZhyTEggF5tJv8tbt" crossorigin="anonymous">
 </head>
