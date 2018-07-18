@@ -38,6 +38,7 @@ Class Download_model extends CI_Model
 		{
 			$this->db->where('post_id',$id);
 			$this->db->from('answers');
+			$this->db->order_by('rate', 'DESC');
 			$this->db->join('users','users.user_id = answers.author_id');
 			return $this->db->get();
 		}
@@ -45,5 +46,11 @@ Class Download_model extends CI_Model
 		{
 			$this->db->where('author_id',$id);
 			return $this->db->get('posts');
+		}
+		public function rate($id)
+		{
+			$this->db->where('id',$id);
+			$this->db->select('rate');
+			return $this->db->get('answers')->row();
 		}
 }

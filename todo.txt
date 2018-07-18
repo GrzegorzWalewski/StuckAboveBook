@@ -1,5 +1,9 @@
-Add functionality to rate buttons
+Bug fix
+Add answer page
+View
+Other devices view
 ------DONE-----------
 Add problem pages
 Add links to problems
 Customize problem pages
+Add functionality to rate buttons

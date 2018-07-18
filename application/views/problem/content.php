@@ -21,16 +21,51 @@
             <p class=''>".$answer->answer."</p>
           </div>
           <div class='uk-text-right uk-padding uk-width-1-5'>
-            <a class=\"rate_button fas fa-angle-double-up fa-4x\" id='plus_".$answer->id."'></a>
-            <p class='uk-text-top uk-margin-top uk-margin-right '>".$answer->rate."</p>
-            <a class=\"rate_button fas fa-angle-double-down fa-4x\" id='minus_".$answer->id."''></a>
+            <a ";
+            if(isset($auth_level)&&$auth_level>=1){
+              echo "onclick='rate(".$auth_user_id.",".$answer->id.",\"up\")'";
+            }
+            else
+            {
+              echo "onclick='alert(\"Musisz byc zalogowany zeby ocaniac\")'";
+            }
+            echo " class=\"rate_button fas fa-angle-double-up fa-4x\" id='plus_".$answer->id."'></a>
+            <p id='rate".$answer->id."' class='uk-text-top uk-margin-top uk-margin-right '>".$answer->rate."</p>
+            <a ";
+            if(isset($auth_level)&&$auth_level>=1){
+              echo "onclick='rate(".$auth_user_id.",".$answer->id.",\"down\")'";
+            }
+            else
+            {
+              echo "onclick='alert(\"Musisz byc zalogowany zeby ocaniac\")'";
+            }
+            echo " class=\"rate_button fas fa-angle-double-down fa-4x\" id='minus_".$answer->id."''></a>
           </div>
         </div>";
       }
+      echo "<div class='answer uk-padding no-left-margin uk-margin-medium-top uk-text-center'>";
       if(empty($answers))
       {
-        echo "<div class='answer uk-padding no-left-margin uk-margin-medium-top uk-text-center'><p>Jeszcze nikt nie zna odpowiedzi</p></div></br> ";
+        echo "<p>Jeszcze nikt nie zna odpowiedzi</p></br> ";
       }
-      echo "<div class='answer uk-padding no-left-margin uk-margin-medium-top uk-text-center'><a>Dodaj Swoja odpowiedz</a></div>";
+      echo "<a>Dodaj Swoja odpowiedz</a></div>";
       ?>
 		</div>
+    <script type="text/javascript">
+      function rate(userid,id,rate)
+      {
+        if (window.XMLHttpRequest) {
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+          xmlhttp=new XMLHttpRequest();
+        } else {  // code for IE6, IE5
+          xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+        if (this.readyState==4 && this.status==200) {
+          document.getElementById("rate"+id).innerHTML=this.responseText;
+        }
+  }
+  xmlhttp.open("GET","/stuckAboveBook/ajax/rate/"+userid+"/"+id+"/"+rate,true);
+  xmlhttp.send();
+      }
+    </script>

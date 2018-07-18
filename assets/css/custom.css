@@ -118,3 +118,7 @@ html body nav.uk-navbar-container.uk-margin.uk-navbar{
 {
 	margin-left: 0px!important;
 }
+.rate_button:hover
+{
+	text-decoration: none;
+}

@@ -57,7 +57,53 @@ Class Upload_model extends CI_Model
                 $data = array('name' => $title,'author'=>$author,'pages'=>$pages,'category_id'=>$categoryid );
 			     $this->db->insert('books',$data);
 			}
-			
+		}
+		public function rate($userid,$id,$rate)
+		{
+			$this->db->select('rate');
+			$this->db->where('userid',$userid);
+			$this->db->where('answerid',$id);
+			$result=$this->db->get('rate')->row();
+			if($rate=="up")
+			{
+				$rate="1";
+			}
+			else
+			{
+				$rate="-1";
+			}
+			if(null==$result)
+			{	
+				$this->db->set('userid',$userid);
+				$this->db->set('answerid',$id);
+				$this->db->set('rate',$rate);
+				$this->db->insert('rate');
 
+				$this->db->set('rate', 'rate + ' . (int) $rate, FALSE);
+				$this->db->where('id',$id);
+				$this->db->update('answers');
+			}
+			else
+			{
+				if($result->rate!=$rate)
+				{
+						$this->db->where('userid',$userid);
+						$this->db->where('answerid',$id);
+						$this->db->set('rate',$rate);
+						$this->db->update('rate');
+					if($rate==1)
+					{
+						$this->db->set('rate', 'rate + 2', FALSE);
+						$this->db->where('id',$id);
+						$this->db->update('answers');
+					}
+					else
+					{
+						$this->db->set('rate', 'rate - 2', FALSE);
+						$this->db->where('id',$id);
+						$this->db->update('answers');
+					}
+				}
+			}
 		}
 }
