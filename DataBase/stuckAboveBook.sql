@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 11, 2018 at 10:13 PM
+-- Generation Time: Jul 19, 2018 at 06:36 PM
 -- Server version: 10.1.34-MariaDB
 -- PHP Version: 7.2.7
 
@@ -67,10 +67,20 @@ CREATE TABLE `acl_categories` (
 
 CREATE TABLE `answers` (
   `id` int(11) NOT NULL,
-  `author_id` int(255) NOT NULL,
+  `author_id` bigint(20) NOT NULL,
   `post_id` int(11) NOT NULL,
-  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `answer` varchar(255) COLLATE ucs2_polish_ci NOT NULL,
+  `rate` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=ucs2 COLLATE=ucs2_polish_ci;
+
+--
+-- Dumping data for table `answers`
+--
+
+INSERT INTO `answers` (`id`, `author_id`, `post_id`, `date`, `answer`, `rate`) VALUES
+(1, 3888206939, 4, '2018-07-13 06:15:27', 'Zabij sie', -1),
+(2, 3888206939, 4, '2018-07-13 06:15:27', 'Zabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZabij sieZab', 0);
 
 -- --------------------------------------------------------
 
@@ -92,7 +102,7 @@ CREATE TABLE `auth_sessions` (
 --
 
 INSERT INTO `auth_sessions` (`id`, `user_id`, `login_time`, `modified_at`, `ip_address`, `user_agent`) VALUES
-('6f3ebfaa967dd7a154baab3ad1e2306518f189cf', 3888206939, '2018-07-11 21:59:03', '2018-07-11 20:09:14', '127.0.0.1', 'Firefox 61.0 on Linux');
+('7fa444bef245ceb4374f454553b23ec7b23cb60b', 3888206939, '2018-07-18 13:29:14', '2018-07-18 13:05:23', '127.0.0.1', 'Firefox 61.0 on Linux');
 
 -- --------------------------------------------------------
 
@@ -190,7 +200,7 @@ CREATE TABLE `login_errors` (
 --
 
 INSERT INTO `login_errors` (`ai`, `username_or_email`, `ip_address`, `time`) VALUES
-(1, 'Grzojda', '127.0.0.1', '2018-07-11 21:58:38');
+(4, 'Grzojda', '127.0.0.1', '2018-07-18 13:23:33');
 
 -- --------------------------------------------------------
 
@@ -205,7 +215,7 @@ CREATE TABLE `posts` (
   `page_from` int(11) NOT NULL,
   `page_to` int(11) NOT NULL,
   `book_id` int(11) NOT NULL,
-  `author_id` int(255) NOT NULL,
+  `author_id` bigint(20) NOT NULL,
   `categoryid` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=ucs2 COLLATE=ucs2_polish_ci;
 
@@ -214,7 +224,11 @@ CREATE TABLE `posts` (
 --
 
 INSERT INTO `posts` (`id`, `name`, `problem`, `page_from`, `page_to`, `book_id`, `author_id`, `categoryid`) VALUES
-(1, 'AAAAA', 'Jest duzy', 1, 12, 1, 0, 1);
+(1, 'AAAAA', 'Jest duzy', 1, 12, 1, 0, 1),
+(2, '', 'DUdpa', 1, 20, 1, 0, 1),
+(3, '', 'Dupaaaaaaaa', 12, 22, 1, 2147483647, 1),
+(4, 'Tytul', 'AAAAAA', 12, 12, 1, 3888206939, 1),
+(5, 'To  jest tyutl', 'A to nie', 1, 12, 1, 3888206939, 1);
 
 -- --------------------------------------------------------
 
@@ -254,7 +268,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`user_id`, `username`, `email`, `auth_level`, `banned`, `passwd`, `passwd_recovery_code`, `passwd_recovery_date`, `passwd_modified_at`, `last_login`, `created_at`, `modified_at`) VALUES
-(3888206939, 'Grzojda', 'grzojda@gmail.com', 1, '0', '$2y$11$Z4ymilgrMJgAOzIQFNQzSexVAH6y2vNVSjKP20ukeyDgwwnSEf4pq', NULL, NULL, NULL, '2018-07-11 21:59:03', '2018-07-11 21:58:53', '2018-07-11 19:59:03');
+(3888206939, 'Grzojda', 'grzojda@gmail.com', 1, '0', '$2y$11$Z4ymilgrMJgAOzIQFNQzSexVAH6y2vNVSjKP20ukeyDgwwnSEf4pq', NULL, NULL, NULL, '2018-07-18 13:29:14', '2018-07-11 21:58:53', '2018-07-18 11:29:14');
 
 --
 -- Triggers `users`
@@ -390,7 +404,7 @@ ALTER TABLE `acl_categories`
 -- AUTO_INCREMENT for table `answers`
 --
 ALTER TABLE `answers`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `books`
@@ -420,36 +434,19 @@ ALTER TABLE `ips_on_hold`
 -- AUTO_INCREMENT for table `login_errors`
 --
 ALTER TABLE `login_errors`
-  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `posts`
 --
 ALTER TABLE `posts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `username_or_email_on_hold`
 --
 ALTER TABLE `username_or_email_on_hold`
   MODIFY `ai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- Constraints for dumped tables
---
-
---
--- Constraints for table `acl`
---
-ALTER TABLE `acl`
-  ADD CONSTRAINT `acl_ibfk_1` FOREIGN KEY (`action_id`) REFERENCES `acl_actions` (`action_id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `acl_ibfk_2` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE;
-
---
--- Constraints for table `acl_actions`
---
-ALTER TABLE `acl_actions`
-  ADD CONSTRAINT `acl_actions_ibfk_1` FOREIGN KEY (`category_id`) REFERENCES `acl_categories` (`category_id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
