@@ -109,6 +109,11 @@ class Home extends MY_Controller {
 	public function problem()
 	{
 		$id=$this->uri->segment(3);
+		if(!null==$this->input->post('answer'))
+		{
+			$this->load->model('upload_model');
+			$this->upload_model->addAnswer($id,$this->input->post('answer'));
+		}
 		$this->load->model('download_model');
 		$data['problem']=$this->download_model->problemById($id)->result()[0];
 		$data['answers']=$this->download_model->problemAnswers($id)->result();

@@ -106,4 +106,11 @@ Class Upload_model extends CI_Model
 				}
 			}
 		}
+		public function addAnswer($postId,$answer)
+		{
+			$this->db->set('answer',$answer);
+			$this->db->set('post_id',$postId);
+			$this->db->set('author_id',$this->auth_user_id);
+			$this->db->insert('answers');
+		}
 }

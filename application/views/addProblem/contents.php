@@ -34,6 +34,7 @@
 
 		
 </fieldset>
+</form>
 
 <script>
 function showResultForCategory(str) {

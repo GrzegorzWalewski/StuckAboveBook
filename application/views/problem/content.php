@@ -43,13 +43,27 @@
           </div>
         </div>";
       }
-      echo "<div class='answer uk-padding no-left-margin uk-margin-medium-top uk-text-center'>";
+      
       if(empty($answers))
       {
-        echo "<p>Jeszcze nikt nie zna odpowiedzi</p></br> ";
+        echo "<div class='answer uk-padding no-left-margin uk-margin-medium-top uk-text-center'>";
+        echo "<p>Jeszcze nikt nie zna odpowiedzi</p></br> </div>";
       }
-      echo "<a>Dodaj Swoja odpowiedz</a></div>";
-      ?>
+      if(isset($auth_level)&&$auth_level>=1)
+      {
+        echo "<div class='answer no-left-margin uk-margin-medium-top uk-text-center'>
+              <form action=\"/stuckAboveBook/home/problem/".$problem->id."\" method=\"post\">
+                <fieldset class=\"uk-fieldset\">
+                  <legend class=\"uk-legend\">Dodaj swoja odpowiedz</legend>
+                  <div class=\"uk-margin\">
+                    <textarea class=\"uk-textarea\" name=\"answer\" rows=\"5\" placeholder=\"Odpowiedz\"></textarea>
+                  </div>
+                  <button class=\"uk-button uk-button-default  no-border\">Wyślij</button>
+                </fieldset>
+              </form>
+            </div>";
+      }
+    ?>
 		</div>
     <script type="text/javascript">
       function rate(userid,id,rate)
