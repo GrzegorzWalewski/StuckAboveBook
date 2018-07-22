@@ -18,13 +18,13 @@
                 <div class="uk-form-width-medium border-1 livesearch" style="margin-left: 452px;" id="book">
                 </div>
             	</div>
-        <div class="uk-text-center">Jeżeli nie ma tutaj twojej książki/kategorii przejdź <a href="/stuckAboveBook/home/addBook">tutaj</a> by w szybki sposób ją dodać</div>
+        <div class="uk-text-center uk-padding">Jeżeli nie ma tutaj twojej książki/kategorii przejdź <a href="/stuckAboveBook/home/addBook">tutaj</a> by w szybki sposób ją dodać</div>
         	
 		</div>
 
-		<div class="uk-width-1-1 uk-text-center uk-margin-small-top uk-padding uk-margin-large-left uk-margin-large-right blue">
+		<div class="uk-width-1-1 uk-text-center uk-margin-small-top uk-padding padding-small-right uk-margin-large-left@m uk-margin-large-right@m uk-margin-small-left blue">
       <div class="uk-margin">
-        <input autocomplete="off" class="uk-input uk-form-medium uk-form-width-large blue no-border" type="text" placeholder="Tytul" name="name" required>
+        <input autocomplete="off" class="uk-input uk-form-medium uk-form-width-large@m  blue no-border" type="text" placeholder="Tytul" name="name" required>
       </div>
 			<div class="uk-margin">
             	<textarea autocomplete="off" name="post" class="uk-textarea no-border" rows="8" placeholder="Tu opisz swój problem" required></textarea>

@@ -1,8 +1,8 @@
 <body>
 	<div class="uk-grid">
-		<div class="uk-width-1-1 uk-margin-large-bottom uk-margin-large-left uk-margin-large-right  blue uk-padding uk-text-left">
+		<div class="uk-width-1-1 uk-margin-large-bottom uk-margin-large-left@m uk-margin-large-right@m  blue uk-padding uk-text-left">
       <div class="uk-card-header ">
-          <h1 class="uk-margin-remove-bottom"><?php echo $problem->name ?></h1>
+          <h3 class="uk-margin-remove-bottom"><?php echo $problem->name ?></h3>
           <p class="ul-text-meta uk-margin-remove-top"><?php echo $problem->username ?></p>
         </div>
         <div class="uk-card-body">
@@ -11,7 +11,7 @@
           
 		</div>
 
-		<div class="uk-width-1-1 uk-text-center uk-margin-small-top uk-padding uk-margin-large-left uk-margin-large-right blue">
+		<div class="uk-width-1-1 uk-text-center uk-margin-small-top uk-padding uk-margin-large-left@m uk-margin-large-right@m padding-small-right uk-margin-small-left blue">
 			<?php
       foreach($answers as $answer)
       {
@@ -20,7 +20,7 @@
           <div class='uk-padding uk-width-4-5'>
             <p class=''>".$answer->answer."</p>
           </div>
-          <div class='uk-text-right uk-padding uk-width-1-5'>
+          <div class='uk-text-right@m uk-padding-remove-left uk-width-1-5'>
             <a ";
             if(isset($auth_level)&&$auth_level>=1){
               echo "onclick='rate(".$auth_user_id.",".$answer->id.",\"up\")'";
@@ -53,8 +53,8 @@
       {
         echo "<div class='answer no-left-margin uk-margin-medium-top uk-text-center'>
               <form action=\"/stuckAboveBook/home/problem/".$problem->id."\" method=\"post\">
-                <fieldset class=\"uk-fieldset\">
-                  <legend class=\"uk-legend\">Dodaj swoja odpowiedz</legend>
+                <fieldset class=\"uk-fieldset uk-padding\">
+                  <h3 class=\"uk-legend\">Dodaj swoja odpowiedz</h3>
                   <div class=\"uk-margin\">
                     <textarea class=\"uk-textarea\" name=\"answer\" rows=\"5\" placeholder=\"Odpowiedz\"></textarea>
                   </div>

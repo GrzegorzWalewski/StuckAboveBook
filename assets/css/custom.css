@@ -122,3 +122,32 @@ html body nav.uk-navbar-container.uk-margin.uk-navbar{
 {
 	text-decoration: none;
 }
+html.uk-offcanvas-page body.uk-offcanvas-container div#offcanvas-slide.uk-offcanvas.uk-open div.uk-offcanvas-bar.uk-offcanvas-bar-animation.uk-offcanvas-slide ul.uk-nav.uk-nav-default.uk-nav-parent-icon.orange a
+{
+	color: #ffbf80;
+}
+@media only screen and (max-width:959px) {
+
+}
+@media only screen and (min-width:959px) {
+
+}
+#sidebar_button{
+		display: block;
+        margin: 15px;
+        position: absolute;
+        right: 15px;
+        top: 15px;
+}
+.padding-small-right
+{
+	padding-right: 10px;
+}
+body
+{
+	padding-top: 10px;
+}
+.uk-nav
+{
+	font-size: 1.2rem;
+}
