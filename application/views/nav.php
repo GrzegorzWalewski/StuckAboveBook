@@ -39,7 +39,7 @@
 
     </div>
 </div>
-<nav class="uk-navbar-container uk-margin no-bottom-margin uk-visible@m" uk-navbar>
+<nav class="uk-navbar-container no-bottom-margin uk-visible@m" uk-navbar>
     <div class="uk-navbar-left">
 
         <a class="uk-navbar-item uk-logo orange" href="/stuckAboveBook/home/"><img class="logo" src="<?php echo base_url() ?>assets/img/icon.png"></a>

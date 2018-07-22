@@ -13,9 +13,9 @@
         	      	
             	<input autocomplete="off" class="uk-input uk-form-small uk-form-width-medium blue no-border" type="text" placeholder="Do strony" name="toPage" required>
 				<div class="uk-margin  no-top-margin ">
-            		<div class="uk-form-width-medium border-1 livesearch"  style="margin-left: 248px;" id="category">
+            		<div class="uk-form-width-medium border-1 livesearch" id="category">
             		</div>
-                <div class="uk-form-width-medium border-1 livesearch" style="margin-left: 452px;" id="book">
+                <div class="uk-form-width-medium border-1 livesearch" id="book">
                 </div>
             	</div>
         <div class="uk-text-center uk-padding">Jeżeli nie ma tutaj twojej książki/kategorii przejdź <a href="/stuckAboveBook/home/addBook">tutaj</a> by w szybki sposób ją dodać</div>
@@ -38,6 +38,10 @@
 
 <script>
 function showResultForCategory(str) {
+  var positionLeft=document.getElementById("categoryInput").offsetLeft;
+  var positionTop=document.getElementById("categoryInput").offsetTop;
+  document.getElementById("category").style.left=positionLeft+"px";
+  document.getElementById("category").style.top=positionTop+30+"px";
   if (str.length==0) {
     document.getElementById("category").innerHTML="";
     document.getElementById("category").style.border="0px";
@@ -60,6 +64,10 @@ function showResultForCategory(str) {
 }
 
 function showResultForBook(str) {
+  var positionLeft=document.getElementById("bookInput").offsetLeft;
+  var positionTop=document.getElementById("bookInput").offsetTop;
+  document.getElementById("book").style.left=positionLeft+"px";
+  document.getElementById("book").style.top=positionTop+30+"px";
   var categoryId=document.getElementById("categoryId").value;
   if (str.length==0) {
     document.getElementById("book").innerHTML="";

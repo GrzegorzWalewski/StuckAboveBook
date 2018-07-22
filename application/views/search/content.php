@@ -13,9 +13,9 @@
         	      	
             	<input class="uk-input  uk-form-small uk-form-width-medium blue no-border" autocomplete="off" type="text" placeholder="Do strony" name="toPage" required>
 				<div class="uk-margin  no-top-margin ">
-            		<div class="uk-form-width-medium border-1 livesearch"  style="margin-left: 248px;" id="category">
+            		<div class="uk-form-width-medium border-1 livesearch" id="category">
             		</div>
-                <div class="uk-form-width-medium border-1 livesearch" style="margin-left: 452px;" id="book">
+                <div class="uk-form-width-medium border-1 livesearch" id="book">
                 </div>
             	</div>
                 <button class="uk-button uk-button-default  no-border">Szukaj</button>
@@ -26,6 +26,10 @@
 <script>
 function showResultForCategory(str) {
   if (str.length==0) {
+    var positionLeft=document.getElementById("categoryInput").offsetLeft;
+    var positionTop=document.getElementById("categoryInput").offsetTop;
+    document.getElementById("category").style.left=positionLeft+"px";
+    document.getElementById("category").style.top=positionTop+30+"px";
     document.getElementById("category").innerHTML="";
     document.getElementById("category").style.border="0px";
     return;

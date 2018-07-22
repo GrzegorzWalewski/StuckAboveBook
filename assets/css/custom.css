@@ -8,11 +8,11 @@
 	margin-left: 70px;
 	margin-bottom: 70px;
 }
-.uk-navbar-container.uk-margin .orange
+.uk-navbar-container .orange
 {
 	color: #ffbf80;
 }
-html body nav.uk-navbar-container.uk-margin.uk-navbar{
+html body nav.uk-navbar-container.uk-navbar{
 	background-color:#666666;
 }
 .no-bottom-margin
@@ -127,9 +127,17 @@ html.uk-offcanvas-page body.uk-offcanvas-container div#offcanvas-slide.uk-offcan
 	color: #ffbf80;
 }
 @media only screen and (max-width:959px) {
-
+	.uk-nav
+	{
+	font-size: 1.2rem;
+	}
+	body
+	{
+	padding-top: 10px;
+	}
 }
 @media only screen and (min-width:959px) {
+	
 
 }
 #sidebar_button{
@@ -142,12 +150,4 @@ html.uk-offcanvas-page body.uk-offcanvas-container div#offcanvas-slide.uk-offcan
 .padding-small-right
 {
 	padding-right: 10px;
-}
-body
-{
-	padding-top: 10px;
-}
-.uk-nav
-{
-	font-size: 1.2rem;
 }
