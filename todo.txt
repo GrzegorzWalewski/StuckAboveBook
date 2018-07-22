@@ -1,7 +1,6 @@
 Bug fix
 View
 Add validation to categories and book searching
-Add error message when problem not found
 ------DONE-----------
 Add problem pages
 Add links to problems
@@ -10,3 +9,4 @@ Add functionality to rate buttons
 Add "add answer"
 Other devices view
 Fix categories and book advice
+Add error message when problem not found

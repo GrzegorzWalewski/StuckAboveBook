@@ -151,3 +151,10 @@ html.uk-offcanvas-page body.uk-offcanvas-container div#offcanvas-slide.uk-offcan
 {
 	padding-right: 10px;
 }
+.center_verticaly_parent
+{
+	display: flex;
+	justify-content: center; /* align horizontal */
+	align-items: center;
+	min-height: 100%;
+}

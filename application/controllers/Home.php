@@ -115,8 +115,16 @@ class Home extends MY_Controller {
 			$this->upload_model->addAnswer($id,$this->input->post('answer'));
 		}
 		$this->load->model('download_model');
-		$data['problem']=$this->download_model->problemById($id)->result()[0];
+		$data['problem']=$this->download_model->problemById($id)->result();
 		$data['answers']=$this->download_model->problemAnswers($id)->result();
-		$this->load->view('problem/content',$data);
+		if(empty($data['problem']))
+		{
+			$this->load->view('errors/problem404');
+		}
+		else
+		{
+			$data['problem']=$data['problem'][0];
+			$this->load->view('problem/content',$data);
+		}
 	}
 }

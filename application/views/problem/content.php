@@ -20,7 +20,7 @@
           <div class='uk-padding uk-width-4-5'>
             <p class=''>".$answer->answer."</p>
           </div>
-          <div class='uk-text-right@m uk-padding-remove-left uk-width-1-5'>
+          <div class='uk-text-right@m uk-padding uk-padding-remove-left uk-width-1-5'>
             <a ";
             if(isset($auth_level)&&$auth_level>=1){
               echo "onclick='rate(".$auth_user_id.",".$answer->id.",\"up\")'";
