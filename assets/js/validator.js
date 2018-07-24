@@ -16,6 +16,12 @@ class My_Validator
 			case "text":
 			var regExp = new RegExp("[0-9a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{6,200}");
 			break;
+			case "title":
+			var regExp = new RegExp("[0-9a-zA-ZąćęłńóśźżĄĆĘŁŃÓŚŹŻ]{2,30}");
+			break;
+			case "number":
+			var regExp = new RegExp("[0-9]{1,5}");
+			break;
 			default:
 			alert("Your validator is set wrong!");
 			break;
@@ -64,6 +70,41 @@ class My_Validator
 		{
 			confirmInput.className += " uk-form-success";
 			submitButton.removeAttribute("disabled");
+		}
+	}
+	hiddenValidate(event,category,book)
+	{
+		var categoryInput = document.getElementById("categoryInput");
+		var bookInput = document.getElementById("bookInput");
+		if(category.value==""||book.value=="")
+		{	
+			document.getElementById("categoryBookReminder").classList+="uk-text-danger";
+			if(category.value==""&&book.value=="")
+			{
+				bookInput.classList+=" uk-form-danger";
+				categoryInput.classList+=" uk-form-danger";
+			}
+			else if(category.value=="")
+			{
+				categoryInput.classList+=" uk-form-danger";
+				bookInput.classList+=" uk-form-success";
+				book.className.replace("uk-form-danger","");
+			}
+			else if(book.value=="")
+			{
+				categoryInput.className.replace("uk-form-danger","");
+				bookInput.classList+=" uk-form-danger";
+				categoryInput.classList+=" uk-form-success";
+			}
+			event.preventDefault();
+		}
+		else
+		{
+			categoryInput.className.replace("uk-form-danger","");
+			book.className.replace("uk-form-danger","");
+			categoryInput.classList+=" uk-form-success";
+			bookInput.classList+=" uk-form-success";
+
 		}
 	}
 }

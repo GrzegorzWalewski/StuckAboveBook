@@ -1,5 +1,3 @@
-Bug fix
-View
 Add validation to categories and book searching
 ------DONE-----------
 Add problem pages
@@ -10,3 +8,4 @@ Add "add answer"
 Other devices view
 Fix categories and book advice
 Add error message when problem not found
+Add problem add page

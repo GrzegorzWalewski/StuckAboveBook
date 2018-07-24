@@ -1,17 +1,18 @@
 <body>
 	<div class="uk-grid">
 		<div class="uk-width-1-1 uk-margin-large-bottom  blue uk-padding uk-text-center">
-			<form action="" method="post">
+			<form id="addProblemForm" action="" method="post">
     <fieldset class="uk-fieldset">
 			<h1 class=" uk-margin-medium-bottom blue">Tutaj dodasz swój problem</h1>
-			        <input id="categoryId" type="hidden" name="categoryId">
-            	<input id="categoryInput" autocomplete="off" onkeyup="showResultForCategory(this.value)" class="uk-input uk-form-small uk-form-width-medium blue no-border" type="text" placeholder="Kategoria" required>
-        	    <input id="bookId" type="hidden" name="bookId">
-            	<input id="bookInput" autocomplete="off" onkeyup="showResultForBook(this.value)" class="uk-input uk-form-small uk-form-width-medium blue no-border" type="text" placeholder="Książka" required>
+              <p id="categoryBookReminder">Pamietaj, kategorie i ksiazke musisz wybrac z listy ;)</p>
+			        <input id="categoryId" type="hidden" name="categoryId" >
+            	<input id="categoryInput" autocomplete="off" onkeyup="showResultForCategory(this.value)" class="uk-input uk-form-small uk-form-width-medium blue no-border" type="text" placeholder="Kategoria" >
+        	    <input id="bookId" type="hidden" name="bookId" >
+            	<input id="bookInput" autocomplete="off" onkeyup="showResultForBook(this.value)" class="uk-input uk-form-small uk-form-width-medium blue no-border" type="text" placeholder="Książka" >
         	       	
-            	<input autocomplete="off" class="uk-input uk-form-small uk-form-width-medium blue no-border" type="text" placeholder="Od strony" name="fromPage" required>
+            	<input autocomplete="off" id="fromPage" class="uk-input uk-form-small uk-form-width-medium blue no-border" type="text" placeholder="Od strony" name="fromPage" >
         	      	
-            	<input autocomplete="off" class="uk-input uk-form-small uk-form-width-medium blue no-border" type="text" placeholder="Do strony" name="toPage" required>
+            	<input autocomplete="off" id="toPage" class="uk-input uk-form-small uk-form-width-medium blue no-border" type="text" placeholder="Do strony" name="toPage" >
 				<div class="uk-margin  no-top-margin ">
             		<div class="uk-form-width-medium border-1 livesearch" id="category">
             		</div>
@@ -24,12 +25,12 @@
 
 		<div class="uk-width-1-1 uk-text-center uk-margin-small-top uk-padding padding-small-right uk-margin-large-left@m uk-margin-large-right@m uk-margin-small-left blue">
       <div class="uk-margin">
-        <input autocomplete="off" class="uk-input uk-form-medium uk-form-width-large@m  blue no-border" type="text" placeholder="Tytul" name="name" required>
+        <input autocomplete="off" class="uk-input uk-form-medium uk-form-width-large@m  blue no-border" type="text" placeholder="Tytul" id="title" name="name" >
       </div>
 			<div class="uk-margin">
-            	<textarea autocomplete="off" name="post" class="uk-textarea no-border" rows="8" placeholder="Tu opisz swój problem" required></textarea>
+            	<textarea id="text" autocomplete="off" name="post" class="uk-textarea no-border" rows="8" placeholder="Tu opisz swój problem" ></textarea>
         	</div>
-        	<button class="uk-button uk-button-default  no-border">Wyślij</button>
+        	<button id="submit_button" class="uk-button uk-button-default  no-border" onclick="hiddenValidate(event)">Wyślij</button>
 		</div>
 
 		
@@ -37,6 +38,41 @@
 </form>
 
 <script>
+
+  var validator = new My_Validator;
+  var submitButton = document.getElementById("submit_button");
+  var fromPage = document.getElementById("fromPage");
+  var toPage = document.getElementById("toPage");
+  var text = document.getElementById("text");
+  var title = document.getElementById("title");
+  var form = document.getElementById("addProblemForm");
+  var formInputs = [fromPage, toPage, title, text];
+
+  fromPage.addEventListener("keyup", function() {
+      validator.validate(fromPage,submitButton,"number");
+}); 
+
+  toPage.addEventListener("keyup", function() {
+      validator.validate(toPage,submitButton,"number");
+});   
+  text.addEventListener("keyup", function() {
+      validator.validate(text,submitButton,"text");
+});   
+  title.addEventListener("keyup", function() {
+      validator.validate(title,submitButton,"title");
+}); 
+
+  submitButton.addEventListener("click",function(event){
+    validator.submit(submitButton,formInputs,event);
+  });
+
+function hiddenValidate(event)
+{
+  var validator = new My_Validator;
+  var category = document.getElementById('categoryId');
+  var book = document.getElementById('bookId');
+  validator.hiddenValidate(event,category,book);
+}
 function showResultForCategory(str) {
   var positionLeft=document.getElementById("categoryInput").offsetLeft;
   var positionTop=document.getElementById("categoryInput").offsetTop;
